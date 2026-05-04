@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>KG App Lite — Manage Brand Logic</title>
+  <title>KG App Lite — Manage Platform Logic</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -51,8 +51,8 @@
         <a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] transition-colors" href="#">Simulations</a>
         <a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] transition-colors" href="my-vehicles.html">Vehicles</a>
         <a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] transition-colors" href="admin-dashboard.html">Admin</a>
-        <a class="text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] border-b border-[#00c600]" href="manage-brand-logic.html">Brand logic</a>
-        <a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] transition-colors" href="manage-platform-logic.html">Platform logic</a>
+        <a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] transition-colors" href="manage-brand-logic.html">Brand logic</a>
+        <a class="text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] border-b border-[#00c600]" href="manage-platform-logic.html">Platform logic</a>
       </nav>
     </div>
     <div class="flex items-center gap-3 sm:gap-6">
@@ -72,24 +72,29 @@
         <div class="flex flex-wrap items-center gap-2 text-[10px] font-medium tracking-[0.25em] uppercase text-on-surface-variant/60">
           <a href="admin-dashboard.html" class="hover:text-[#00c600] transition-colors">Super Admin</a>
           <span class="text-on-surface-variant/30">/</span>
-          <span class="text-[#00c600]">Manage Brand Logic</span>
+          <span class="text-[#00c600]">Manage Platform Logic</span>
         </div>
         <div class="flex items-center gap-2 text-[#00c600] mb-1">
-          <span class="text-[10px] font-medium tracking-[0.3em] uppercase">Configuration</span>
+          <span class="text-[10px] font-medium tracking-[0.3em] uppercase">Platform ingestion</span>
           <div class="h-[1px] w-12 bg-[#00c600]/30"></div>
         </div>
-        <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-normal text-on-surface leading-tight tracking-tight">Manage Brand Logic</h2>
+        <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-normal text-on-surface leading-tight tracking-tight">Manage Platform Logic</h2>
         <p class="text-base text-on-surface-variant max-w-2xl font-light leading-relaxed">
-          Define how a brand is interpreted from your source system: document the source type, attach reference visuals and tables, and leave clear instructions for technicians.
+          Configure how each third-party platform should be read: attach canonical examples, the official list of functions or reference tables, and detailed instructions. When you save, the system will reuse this bundle to interpret and process <strong class="font-medium text-on-surface/90">future uploads from that platform</strong> (same platform + brand context).
         </p>
+        <div class="flex gap-3 p-4 rounded-[6px] border border-[#00c600]/25 bg-[#00c600]/5 max-w-2xl">
+          <span class="material-symbols-outlined text-[#00c600] shrink-0 text-xl">info</span>
+          <p class="text-sm text-on-surface-variant leading-relaxed">
+            Saved platform logic becomes the reference pipeline for automated parsing—diagrams for visual alignment, the functions list for scope, and instructions for edge cases.
+          </p>
+        </div>
       </section>
 
-      <form id="brand-logic-form" class="bg-[#151e12] border border-[#2e372a] rounded-[6px] p-8 flex flex-col gap-8" novalidate>
+      <form id="platform-logic-form" class="bg-[#151e12] border border-[#2e372a] rounded-[6px] p-8 flex flex-col gap-8" novalidate>
         <div class="flex flex-col gap-2">
-          <label for="source-type" class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">Source Type</label>
-          <select id="source-type" name="sourceType" required class="bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface font-light p-4 rounded-[6px] appearance-none cursor-pointer">
-            <option value="" disabled selected>Select source type…</option>
-            <option value="original_manufacturer">Original Manufacturer</option>
+          <label for="platform" class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">Platform</label>
+          <select id="platform" name="platform" required class="bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface font-light p-4 rounded-[6px] appearance-none cursor-pointer">
+            <option value="" disabled selected>Select platform…</option>
             <option value="autodata">AutoData</option>
             <option value="alldata">ALLDATA</option>
             <option value="mitchell1">Mitchell1</option>
@@ -99,13 +104,13 @@
 
         <div class="flex flex-col gap-2">
           <label for="brand-name" class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">Brand name</label>
-          <input id="brand-name" name="brandName" type="text" required placeholder="e.g. Toyota, BMW, Ford…" class="bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface font-light p-4 rounded-[6px] placeholder:text-on-surface-variant/25"/>
+          <input id="brand-name" name="brandName" type="text" required placeholder="e.g. Toyota, Honda, Ford…" class="bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface font-light p-4 rounded-[6px] placeholder:text-on-surface-variant/25"/>
         </div>
 
         <div class="flex flex-col gap-3">
           <div class="flex flex-col gap-1">
-            <span class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">Visual example diagrams</span>
-            <span class="text-sm text-on-surface-variant/70 font-light">Upload one or more diagrams (PNG, JPG, WebP, GIF). Used as visual references for wiring or layout.</span>
+            <span class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">Example diagrams</span>
+            <span class="text-sm text-on-surface-variant/70 font-light">Upload multiple screenshots or exports for visual reference (PNG, JPG, WebP, GIF).</span>
           </div>
           <label class="flex flex-col items-center justify-center gap-3 min-h-[140px] border-2 border-dashed border-[#2e372a] rounded-[6px] bg-[#0d160a]/50 hover:border-[#00c600]/50 cursor-pointer transition-colors px-6 py-8">
             <span class="material-symbols-outlined text-4xl text-[#00c600]/80">add_photo_alternate</span>
@@ -119,27 +124,27 @@
 
         <div class="flex flex-col gap-3">
           <div class="flex flex-col gap-1">
-            <span class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">Reference table <span class="text-on-surface-variant/40 normal-case tracking-normal">(if available)</span></span>
-            <span class="text-sm text-on-surface-variant/70 font-light">Optional — pinouts, connector IDs, or lookup tables (CSV, Excel, or PDF).</span>
+            <span class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">List of functions / reference table</span>
+            <span class="text-sm text-on-surface-variant/70 font-light">Upload the platform’s function list, TOC export, or structured reference (CSV, Excel, PDF).</span>
           </div>
           <label class="inline-flex items-center gap-3 px-4 py-3 bg-[#0d160a] border border-[#2e372a] rounded-[6px] hover:border-[#00c600]/40 cursor-pointer transition-colors w-full max-w-xl">
-            <span class="material-symbols-outlined text-[#00c600]">table_chart</span>
-            <span class="flex-1 text-sm text-on-surface-variant">Choose reference file…</span>
-            <input id="reference-table" name="referenceTable" type="file" accept=".csv,.tsv,.xlsx,.xls,.pdf,.txt,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" class="file-input-hidden"/>
+            <span class="material-symbols-outlined text-[#00c600]">functions</span>
+            <span class="flex-1 text-sm text-on-surface-variant">Choose file…</span>
+            <input id="functions-reference" name="functionsReference" type="file" accept=".csv,.tsv,.xlsx,.xls,.pdf,.txt,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" class="file-input-hidden"/>
           </label>
-          <p id="reference-file-name" class="text-[11px] font-mono text-on-surface-variant/60 empty:hidden"></p>
+          <p id="functions-file-name" class="text-[11px] font-mono text-on-surface-variant/60 empty:hidden"></p>
         </div>
 
         <div class="flex flex-col gap-2">
-          <label for="instructions" class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">Instructions</label>
-          <textarea id="instructions" name="instructions" rows="14" placeholder="Document decoding rules, caveats, trim-specific behavior, and anything technicians must follow when using this brand…" class="custom-scrollbar bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface font-light p-4 rounded-[6px] placeholder:text-on-surface-variant/25 min-h-[320px] resize-y leading-relaxed"></textarea>
+          <label for="instructions" class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">Detailed reading instructions</label>
+          <textarea id="instructions" name="instructions" rows="14" placeholder="How to navigate this platform’s UI, interpret labels, map functions to your schema, handle revisions, and any platform-specific caveats for technicians…" class="custom-scrollbar bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface font-light p-4 rounded-[6px] placeholder:text-on-surface-variant/25 min-h-[320px] resize-y leading-relaxed"></textarea>
         </div>
 
         <div id="form-status" class="hidden text-sm font-medium rounded-[6px] px-4 py-3 border border-[#00c600]/40 bg-[#00c600]/10 text-[#77ff61]" role="status"></div>
 
         <div class="flex flex-wrap gap-4 pt-2 border-t border-[#2e372a]">
           <button type="submit" class="px-10 py-4 bg-[#00c600] text-black font-medium text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:bg-[#77ff61] transition-all active:scale-[0.98] active-state-black">
-            Save brand logic
+            Save platform logic
           </button>
           <button type="reset" class="px-8 py-4 border border-[#2e372a] text-on-surface-variant text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:border-on-surface-variant/40 hover:text-on-surface transition-colors">
             Reset form
@@ -153,8 +158,8 @@
     <a href="admin-dashboard.html" class="text-on-surface-variant hover:text-[#00c600]" title="Dashboard"><span class="material-symbols-outlined">grid_view</span></a>
     <button type="button" class="text-on-surface-variant hover:text-[#00c600]" aria-label="Analytics"><span class="material-symbols-outlined">analytics</span></button>
     <a href="my-vehicles.html" class="text-on-surface-variant hover:text-[#00c600]" title="Vehicles"><span class="material-symbols-outlined">directions_car</span></a>
-    <a href="manage-brand-logic.html" class="text-[#00c600]" title="Brand logic"><span class="material-symbols-outlined">tune</span></a>
-    <a href="manage-platform-logic.html" class="text-on-surface-variant hover:text-[#00c600]" title="Platform logic"><span class="material-symbols-outlined">hub</span></a>
+    <a href="manage-brand-logic.html" class="text-on-surface-variant hover:text-[#00c600]" title="Brand logic"><span class="material-symbols-outlined">tune</span></a>
+    <a href="manage-platform-logic.html" class="text-[#00c600]" title="Platform logic"><span class="material-symbols-outlined">hub</span></a>
   </nav>
 
   <script>
@@ -162,9 +167,9 @@
       var diagramInput = document.getElementById("diagram-files");
       var preview = document.getElementById("diagram-preview");
       var fileList = document.getElementById("diagram-file-list");
-      var refInput = document.getElementById("reference-table");
-      var refName = document.getElementById("reference-file-name");
-      var form = document.getElementById("brand-logic-form");
+      var refInput = document.getElementById("functions-reference");
+      var refName = document.getElementById("functions-file-name");
+      var form = document.getElementById("platform-logic-form");
       var statusEl = document.getElementById("form-status");
 
       function clearPreview() {
@@ -214,15 +219,18 @@
 
       form.addEventListener("submit", function (e) {
         e.preventDefault();
-        var source = document.getElementById("source-type").value;
+        var platform = document.getElementById("platform").value;
         var brand = document.getElementById("brand-name").value.trim();
-        if (!source || !brand) {
-          statusEl.textContent = "Please choose a source type and enter a brand name.";
+        if (!platform || !brand) {
+          statusEl.textContent = "Please select a platform and enter a brand name.";
           statusEl.className = "text-sm font-medium rounded-[6px] px-4 py-3 border border-[#ffb4ab]/50 bg-[#93000a]/20 text-[#ffb4ab]";
           statusEl.classList.remove("hidden");
           return;
         }
-        statusEl.textContent = "Prototype: brand logic saved locally (no server). Replace this with API persistence when backend is ready.";
+        statusEl.textContent =
+          "Prototype: platform logic stored locally only. When backed by an API, this profile will guide processing of future uploads from " +
+          document.getElementById("platform").selectedOptions[0].text +
+          " for this brand.";
         statusEl.className = "text-sm font-medium rounded-[6px] px-4 py-3 border border-[#00c600]/40 bg-[#00c600]/10 text-[#77ff61]";
         statusEl.classList.remove("hidden");
       });

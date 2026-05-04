@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KG App Lite — Company Dashboard</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: { "on-surface": "#dbe6d3", "on-surface-variant": "#bbcbb2" },
+          borderRadius: { DEFAULT: "6px" },
+        },
+      },
+    };
+  </script>
+  <style>
+    body { background-color: #0d160a; color: #dbe6d3; font-family: "Space Grotesk", sans-serif; font-weight: 300; }
+    .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24; }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #2e372a; border-radius: 6px; }
+  </style>
+</head>
+<body class="bg-[#0d160a] min-h-screen flex flex-col">
+  <header class="flex flex-wrap justify-between items-center gap-4 w-full px-6 md:px-8 py-6 bg-[#0d160a] border-b border-[#2e372a] sticky top-0 z-50">
+    <div class="flex items-center gap-8 md:gap-12 min-w-0">
+      <a href="landing.html" class="flex items-center gap-2 shrink-0" title="Home">
+        <div class="w-8 h-8 bg-[#00c600] flex items-center justify-center rounded-[6px]">
+          <span class="material-symbols-outlined text-black font-bold text-xl">terminal</span>
+        </div>
+        <span class="text-lg md:text-xl font-medium text-[#00c600] tracking-tighter uppercase truncate">KGAPP <span class="font-light opacity-60 lowercase">lite</span></span>
+      </a>
+      <nav class="hidden sm:flex items-center flex-wrap gap-x-6 gap-y-2 text-[10px] md:text-[11px] font-medium uppercase tracking-[0.2em]">
+        <a class="text-[#00c600] border-b border-[#00c600] pb-0.5" href="company-dashboard.html">Dashboard</a>
+        <a class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="admin-dashboard.html">Admin</a>
+        <a class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="create-company.html">Create company</a>
+      </nav>
+    </div>
+    <div class="flex items-center gap-2 md:gap-4">
+      <a href="landing.html" class="text-[10px] md:text-[11px] text-on-surface-variant/80 hover:text-[#00c600] uppercase tracking-[0.2em] whitespace-nowrap">Sign out</a>
+      <a href="create-company.html" class="px-3 md:px-5 py-2 border border-[#00c600] text-[#00c600] text-[10px] md:text-[11px] font-medium uppercase tracking-[0.2em] rounded-[6px] bg-[#00c600]/10 hover:bg-[#00c600]/20 transition-colors whitespace-nowrap">Sign up</a>
+      <button type="button" class="px-3 md:px-6 py-2 border border-[#00c600]/40 text-[#00c600] text-[10px] md:text-[11px] font-medium uppercase tracking-[0.2em] rounded-[6px] hover:bg-[#00c600] hover:text-black transition-colors whitespace-nowrap">Login</button>
+    </div>
+  </header>
+
+  <main class="flex-1 flex flex-col px-6 md:px-10 lg:px-12 py-10 max-w-6xl mx-auto w-full">
+    <section class="flex flex-col gap-4 mb-8">
+      <div class="flex flex-wrap items-center gap-2 text-[10px] font-medium tracking-[0.25em] uppercase text-on-surface-variant/60">
+        <span class="text-on-surface-variant/50">Company</span>
+        <span class="text-on-surface-variant/30">/</span>
+        <span class="text-[#00c600]">Dashboard</span>
+      </div>
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div>
+          <h1 class="text-3xl md:text-4xl font-normal text-on-surface tracking-tight mb-2">Company Dashboard</h1>
+          <p id="company-tagline" class="text-on-surface-variant font-light max-w-2xl leading-relaxed">
+            Shared workspace for your organization: every instructor sees the same vehicles and the same simulation context. Open a vehicle for detail, wiring, and runs.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+      <a href="my-vehicles.html" class="flex items-center justify-between gap-3 rounded-[6px] border border-[#2e372a] bg-[#151e12] px-5 py-4 text-sm text-on-surface hover:border-[#00c600]/40 transition-colors group">
+        <span class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[#00c600]">directions_car</span>
+          <span class="font-light">My vehicles</span>
+        </span>
+        <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#00c600]">chevron_right</span>
+      </a>
+      <a href="new-simulation.html" class="flex items-center justify-between gap-3 rounded-[6px] border border-[#2e372a] bg-[#151e12] px-5 py-4 text-sm text-on-surface hover:border-[#00c600]/40 transition-colors group">
+        <span class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[#00c600]">science</span>
+          <span class="font-light">New simulation</span>
+        </span>
+        <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#00c600]">chevron_right</span>
+      </a>
+    </div>
+
+    <div class="bg-[#151e12] border border-[#2e372a] rounded-[6px] overflow-hidden">
+      <div class="px-6 py-5 border-b border-[#2e372a] flex flex-wrap items-center justify-between gap-4">
+        <h2 class="text-lg text-[#00c600] font-normal">Fleet</h2>
+        <span id="vehicle-count" class="text-[11px] uppercase tracking-[0.2em] text-on-surface-variant/60"></span>
+      </div>
+      <div class="overflow-x-auto custom-scrollbar">
+        <table class="w-full text-left border-collapse min-w-[640px]">
+          <thead>
+            <tr class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/50 border-b border-[#2e372a]">
+              <th class="p-4 md:p-5 font-medium">Brand</th>
+              <th class="p-4 md:p-5 font-medium">Model</th>
+              <th class="p-4 md:p-5 font-medium">Year</th>
+              <th class="p-4 md:p-5 font-medium">VIN</th>
+              <th class="p-4 md:p-5 font-medium text-right"> </th>
+            </tr>
+          </thead>
+          <tbody id="vehicle-table-body" class="text-sm text-on-surface divide-y divide-[#2e372a]/60"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="mt-8 text-xs text-on-surface-variant/50 font-light max-w-2xl">
+      Prototype data only—connect to your API to load live vehicles. Row click opens vehicle detail.
+    </p>
+  </main>
+
+  <script>
+    (function () {
+      var fleet = [
+        { id: "1", brand: "Toyota", model: "Camry XSE", year: 2023, vin: "4T1B11HK5KU123456" },
+        { id: "2", brand: "Honda", model: "Accord Sport", year: 2022, vin: "1HGCV1F34NA004321" },
+        { id: "3", brand: "Ford", model: "F-150 Lightning", year: 2024, vin: "1FTFW1ED5NFA99887" },
+        { id: "4", brand: "BMW", model: "i4 eDrive40", year: 2023, vin: "WBY31AW09PFN12345" },
+      ];
+
+      try {
+        var draft = sessionStorage.getItem("kgapp_company_draft_v1");
+        if (draft) {
+          var d = JSON.parse(draft);
+          if (d.company && d.company.companyName) {
+            document.getElementById("company-tagline").innerHTML =
+              '<span class="text-[#00c600] font-medium">' +
+              escapeHtml(d.company.companyName) +
+              '</span> — Shared by all instructors in this company: same fleet and simulation context. Open a vehicle for detail, wiring, and runs.';
+          }
+        }
+      } catch (e) {}
+
+      document.getElementById("vehicle-count").textContent = fleet.length + " vehicles";
+
+      var tbody = document.getElementById("vehicle-table-body");
+      fleet.forEach(function (v) {
+        var tr = document.createElement("tr");
+        tr.className = "hover:bg-[#0d160a]/80 cursor-pointer transition-colors group";
+        tr.setAttribute("role", "link");
+        tr.tabIndex = 0;
+        tr.innerHTML =
+          '<td class="p-4 md:p-5 font-light">' +
+          escapeHtml(v.brand) +
+          "</td>" +
+          '<td class="p-4 md:p-5 font-light">' +
+          escapeHtml(v.model) +
+          "</td>" +
+          '<td class="p-4 md:p-5 text-on-surface-variant">' +
+          v.year +
+          "</td>" +
+          '<td class="p-4 md:p-5 font-mono text-xs text-on-surface-variant/90">' +
+          escapeHtml(v.vin) +
+          "</td>" +
+          '<td class="p-4 md:p-5 text-right"><span class="text-[#00c600] text-[10px] uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity">Open</span> <span class="material-symbols-outlined text-[#00c600] text-lg align-middle">chevron_right</span></td>';
+        tr.addEventListener("click", function () {
+          window.location.href = "vehicle-detail.html?id=" + encodeURIComponent(v.id);
+        });
+        tr.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            window.location.href = "vehicle-detail.html?id=" + encodeURIComponent(v.id);
+          }
+        });
+        tbody.appendChild(tr);
+      });
+
+      function escapeHtml(s) {
+        var d = document.createElement("div");
+        d.textContent = s;
+        return d.innerHTML;
+      }
+    })();
+  </script>
+</body>
+</html>

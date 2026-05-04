@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KG App Lite — Create Company</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-surface": "#dbe6d3",
+            "on-surface-variant": "#bbcbb2",
+            surface: "#0d160a",
+          },
+          borderRadius: { DEFAULT: "6px" },
+        },
+      },
+    };
+  </script>
+  <style>
+    body { background-color: #0d160a; color: #dbe6d3; font-family: "Space Grotesk", sans-serif; font-weight: 300; }
+    .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24; }
+    input { font-weight: 300 !important; }
+    .active-state-black:active { background-color: #000000 !important; color: #00c600 !important; }
+  </style>
+</head>
+<body class="bg-[#0d160a] min-h-screen flex flex-col">
+  <header class="flex justify-between items-center w-full px-6 md:px-8 py-6 bg-[#0d160a] border-b border-[#2e372a] sticky top-0 z-50">
+    <div class="flex items-center gap-8 md:gap-12 min-w-0">
+      <a href="admin-dashboard.html" class="flex items-center gap-2 shrink-0">
+        <div class="w-8 h-8 bg-[#00c600] flex items-center justify-center rounded-[6px]">
+          <span class="material-symbols-outlined text-black font-bold text-xl">terminal</span>
+        </div>
+        <span class="text-lg md:text-xl font-medium text-[#00c600] tracking-tighter uppercase truncate">KGAPP <span class="font-light opacity-60 lowercase">lite</span></span>
+      </a>
+      <nav class="hidden sm:flex items-center gap-4 md:gap-8 text-[10px] md:text-[11px] font-medium uppercase tracking-[0.15em] md:tracking-[0.2em]">
+        <a class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="admin-dashboard.html">Dashboard</a>
+        <a class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="company-dashboard.html">Company dashboard</a>
+        <a class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="my-vehicles.html">Vehicles</a>
+      </nav>
+    </div>
+    <div class="flex items-center gap-2 md:gap-4 shrink-0">
+      <a href="create-company.html" class="px-3 md:px-5 py-2 border border-[#00c600] text-[#00c600] text-[10px] md:text-[11px] font-medium uppercase tracking-[0.15em] md:tracking-[0.2em] rounded-[6px] bg-[#00c600]/10 hover:bg-[#00c600]/20 transition-colors whitespace-nowrap">
+        Sign up
+      </a>
+      <button type="button" class="px-3 md:px-6 py-2 border border-[#00c600]/40 text-[#00c600] text-[10px] md:text-[11px] font-medium uppercase tracking-[0.15em] md:tracking-[0.2em] rounded-[6px] hover:bg-[#00c600] hover:text-black transition-all active-state-black whitespace-nowrap">
+        Login
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-1 flex flex-col pb-16">
+    <div class="p-6 md:p-10 lg:p-12 flex flex-col gap-8 max-w-3xl mx-auto w-full">
+      <section class="flex flex-col gap-3">
+        <div class="flex flex-wrap items-center gap-2 text-[10px] font-medium tracking-[0.25em] uppercase text-on-surface-variant/60">
+          <span class="text-on-surface-variant/50">Onboarding</span>
+          <span class="text-on-surface-variant/30">/</span>
+          <span class="text-[#00c600]">Create Company</span>
+        </div>
+        <h1 class="text-3xl md:text-4xl font-normal text-on-surface leading-tight tracking-tight">Create Company</h1>
+        <p class="text-base text-on-surface-variant font-light leading-relaxed max-w-2xl">
+          Set up your organization and instructor roster. You can add vehicles and faults first, then invite your team when everything is ready—invitation emails are only sent when you choose <strong class="font-medium text-on-surface/90">Send Email Invites</strong>.
+        </p>
+        <div class="flex gap-3 p-4 rounded-[6px] border border-[#00c600]/25 bg-[#00c600]/5 max-w-2xl">
+          <span class="material-symbols-outlined text-[#00c600] shrink-0">groups</span>
+          <p class="text-sm text-on-surface-variant leading-relaxed">
+            <span class="text-on-surface font-medium">Save &amp; Continue</span> stores the company and instructor list locally (prototype: no emails). Use <span class="text-on-surface font-medium">Send Email Invites</span> only after you are ready for instructors to receive invitations.
+          </p>
+        </div>
+      </section>
+
+      <form id="create-company-form" class="flex flex-col gap-10" novalidate>
+        <div class="bg-[#151e12] border border-[#2e372a] rounded-[6px] p-6 md:p-8 flex flex-col gap-6">
+          <h2 class="text-lg text-[#00c600] font-normal tracking-tight">Company details</h2>
+          <div class="flex flex-col gap-2">
+            <label for="company-name" class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Company name</label>
+            <input id="company-name" name="companyName" type="text" required autocomplete="organization"
+              class="bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface p-4 rounded-[6px] placeholder:text-on-surface-variant/25"
+              placeholder="Acme Motors Ltd"/>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="region-country" class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Region / Country</label>
+            <input id="region-country" name="regionCountry" type="text" autocomplete="country-name"
+              class="bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface p-4 rounded-[6px] placeholder:text-on-surface-variant/25"
+              placeholder="e.g. North America — United States"/>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="address" class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Address</label>
+            <textarea id="address" name="address" rows="3" autocomplete="street-address"
+              class="bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface p-4 rounded-[6px] placeholder:text-on-surface-variant/25 resize-y min-h-[100px]"
+              placeholder="Street, city, state / province, postal code"></textarea>
+          </div>
+        </div>
+
+        <div class="bg-[#151e12] border border-[#2e372a] rounded-[6px] p-6 md:p-8 flex flex-col gap-6">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <h2 class="text-lg text-[#00c600] font-normal tracking-tight">Instructors</h2>
+            <button type="button" id="add-instructor"
+              class="inline-flex items-center justify-center gap-2 px-4 py-2 border border-[#2e372a] text-on-surface-variant text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:border-[#00c600]/50 hover:text-[#00c600] transition-colors self-start sm:self-auto">
+              <span class="material-symbols-outlined text-lg">person_add</span>
+              Add instructor
+            </button>
+          </div>
+          <p class="text-sm text-on-surface-variant/80 font-light -mt-2">Add team members who will receive access once you send invitations.</p>
+
+          <div id="instructor-rows" class="flex flex-col gap-4"></div>
+        </div>
+
+        <div id="form-status" class="hidden text-sm font-medium rounded-[6px] px-4 py-3 border" role="status"></div>
+
+        <div class="flex flex-col sm:flex-row flex-wrap gap-4 pt-2">
+          <button type="button" id="btn-save-continue"
+            class="px-10 py-4 bg-[#00c600] text-black font-medium text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:bg-[#77ff61] transition-all active:scale-[0.98] active-state-black sm:min-w-[220px]">
+            Save &amp; Continue
+          </button>
+          <button type="button" id="btn-send-invites"
+            class="px-10 py-4 border border-[#00c600]/60 text-[#00c600] font-medium text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:bg-[#00c600]/10 transition-colors sm:min-w-[220px]">
+            Send Email Invites
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <template id="instructor-row-template">
+    <div class="instructor-row flex flex-col gap-4 p-4 rounded-[6px] border border-[#2e372a] bg-[#0d160a]/40">
+      <div class="flex justify-between items-start gap-2">
+        <span class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/50 instructor-label">Instructor</span>
+        <button type="button" class="remove-instructor text-on-surface-variant/50 hover:text-[#ffb4ab] p-1 rounded transition-colors" title="Remove row" aria-label="Remove instructor">
+          <span class="material-symbols-outlined text-xl">close</span>
+        </button>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex flex-col gap-2">
+          <label class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Full name</label>
+          <input type="text" class="instructor-name bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface p-3 rounded-[6px] placeholder:text-on-surface-variant/25" placeholder="Jane Instructor" autocomplete="name"/>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Email</label>
+          <input type="email" class="instructor-email bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface p-3 rounded-[6px] placeholder:text-on-surface-variant/25" placeholder="jane@example.com" autocomplete="email"/>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    (function () {
+      var STORAGE_KEY = "kgapp_company_draft_v1";
+      var rowsContainer = document.getElementById("instructor-rows");
+      var template = document.getElementById("instructor-row-template");
+      var addBtn = document.getElementById("add-instructor");
+      var statusEl = document.getElementById("form-status");
+      var companyName = document.getElementById("company-name");
+      var regionCountry = document.getElementById("region-country");
+      var address = document.getElementById("address");
+
+      function rowCount() {
+        return rowsContainer.querySelectorAll(".instructor-row").length;
+      }
+
+      function updateRowLabels() {
+        var rows = rowsContainer.querySelectorAll(".instructor-row");
+        for (var i = 0; i < rows.length; i++) {
+          var lab = rows[i].querySelector(".instructor-label");
+          if (lab) lab.textContent = "Instructor " + (i + 1);
+        }
+      }
+
+      function addInstructorRow() {
+        var node = template.content.cloneNode(true);
+        var row = node.querySelector(".instructor-row");
+        rowsContainer.appendChild(node);
+        updateRowLabels();
+        var removeBtn = rowsContainer.lastElementChild.querySelector(".remove-instructor");
+        removeBtn.addEventListener("click", function () {
+          if (rowCount() <= 1) {
+            row.querySelector(".instructor-name").value = "";
+            row.querySelector(".instructor-email").value = "";
+            return;
+          }
+          row.remove();
+          updateRowLabels();
+        });
+      }
+
+      function gatherCompany() {
+        return {
+          companyName: companyName.value.trim(),
+          regionCountry: regionCountry.value.trim(),
+          address: address.value.trim(),
+        };
+      }
+
+      function gatherInstructors() {
+        var out = [];
+        var rows = rowsContainer.querySelectorAll(".instructor-row");
+        for (var i = 0; i < rows.length; i++) {
+          var name = rows[i].querySelector(".instructor-name").value.trim();
+          var email = rows[i].querySelector(".instructor-email").value.trim();
+          if (name || email) {
+            out.push({ fullName: name, email: email });
+          }
+        }
+        return out;
+      }
+
+      function emailLooksValid(e) {
+        if (!e) return false;
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+      }
+
+      function showStatus(ok, msg) {
+        statusEl.textContent = msg;
+        statusEl.classList.remove("hidden");
+        if (ok) {
+          statusEl.className =
+            "text-sm font-medium rounded-[6px] px-4 py-3 border border-[#00c600]/40 bg-[#00c600]/10 text-[#77ff61]";
+        } else {
+          statusEl.className =
+            "text-sm font-medium rounded-[6px] px-4 py-3 border border-[#ffb4ab]/50 bg-[#93000a]/20 text-[#ffb4ab]";
+        }
+      }
+
+      function persistDraft() {
+        var payload = {
+          company: gatherCompany(),
+          instructors: gatherInstructors(),
+          savedAt: new Date().toISOString(),
+          invitesSent: false,
+        };
+        try {
+          sessionStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+        } catch (err) {}
+        return payload;
+      }
+
+      function loadDraft() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          if (!raw) return null;
+          return JSON.parse(raw);
+        } catch (e) {
+          return null;
+        }
+      }
+
+      addBtn.addEventListener("click", function () {
+        addInstructorRow();
+      });
+
+      document.getElementById("btn-save-continue").addEventListener("click", function () {
+        var c = gatherCompany();
+        if (!c.companyName) {
+          showStatus(false, "Please enter a company name.");
+          companyName.focus();
+          return;
+        }
+        var payload = persistDraft();
+        var n = payload.instructors.length;
+        showStatus(
+          true,
+          "Saved: company “" +
+            c.companyName +
+            "” and " +
+            n +
+            " instructor row(s) stored. No invitation emails have been sent. Continue setup (vehicles, faults), then use Send Email Invites when ready. (Prototype: data kept in this browser session only.)"
+        );
+      });
+
+      document.getElementById("btn-send-invites").addEventListener("click", function () {
+        var c = gatherCompany();
+        if (!c.companyName) {
+          showStatus(false, "Enter a company name before sending invites.");
+          companyName.focus();
+          return;
+        }
+        var instructors = gatherInstructors().filter(function (i) {
+          return i.email && emailLooksValid(i.email);
+        });
+        if (instructors.length === 0) {
+          showStatus(
+            false,
+            "Add at least one instructor with a valid email address before sending invitations."
+          );
+          return;
+        }
+        var invalidRows = gatherInstructors().filter(function (i) {
+          return i.email && !emailLooksValid(i.email);
+        });
+        if (invalidRows.length) {
+          showStatus(false, "Fix invalid email address(es) before sending invitations.");
+          return;
+        }
+        persistDraft();
+        showStatus(
+          true,
+          "Invitation emails would be sent to " +
+            instructors.length +
+            " instructor(s) at: " +
+            instructors
+              .map(function (i) {
+                return i.email;
+              })
+              .join(", ") +
+            ". (Prototype: no messages are actually delivered.)"
+        );
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            var p = JSON.parse(raw);
+            p.invitesSent = true;
+            p.invitesSentAt = new Date().toISOString();
+            sessionStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+          }
+        } catch (e) {}
+      });
+
+      var draft = loadDraft();
+      if (draft && draft.company && draft.company.companyName) {
+        companyName.value = draft.company.companyName || "";
+        regionCountry.value = draft.company.regionCountry || "";
+        address.value = draft.company.address || "";
+        rowsContainer.innerHTML = "";
+        if (draft.instructors && draft.instructors.length) {
+          for (var j = 0; j < draft.instructors.length; j++) {
+            addInstructorRow();
+            var lastRow = rowsContainer.lastElementChild;
+            lastRow.querySelector(".instructor-name").value = draft.instructors[j].fullName || "";
+            lastRow.querySelector(".instructor-email").value = draft.instructors[j].email || "";
+          }
+        } else {
+          addInstructorRow();
+        }
+        updateRowLabels();
+      } else {
+        addInstructorRow();
+      }
+    })();
+  </script>
+</body>
+</html>

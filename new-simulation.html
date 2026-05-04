@@ -80,6 +80,10 @@
         .terminal-scroll::-webkit-scrollbar-thumb {
             background: #3ee42f;
         }
+        #wiring-modal-img {
+            transform-origin: center center;
+            transition: transform 0.15s ease-out;
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -94,8 +98,9 @@
 <a class="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors" href="#">MY VEHICLES</a>
 </nav>
 </div>
-<div class="flex items-center gap-4">
-<button class="text-xs font-bold uppercase tracking-widest border border-primary text-primary px-6 py-2 rounded hover:bg-primary/10 transition-colors">Login</button>
+<div class="flex items-center gap-3">
+<a href="create-company.html" class="text-xs font-bold uppercase tracking-widest border border-primary text-primary px-5 py-2 rounded hover:bg-primary/10 transition-colors whitespace-nowrap">Sign up</a>
+<button type="button" class="text-xs font-bold uppercase tracking-widest border border-primary text-primary px-6 py-2 rounded hover:bg-primary/10 transition-colors">Login</button>
 </div>
 </header>
 <main class="flex-1 max-w-[1440px] w-full mx-auto p-container-padding">
@@ -106,12 +111,37 @@
                 Configure fault injection parameters and signal continuity for the selected KG node.
             </p>
 </div>
-<!-- Warning Banner -->
-<div class="mb-stack-md bg-warning/5 border border-warning/40 rounded p-4 flex items-start gap-4">
-<span class="material-symbols-outlined text-warning">warning</span>
-<p class="text-xs font-bold text-warning uppercase tracking-widest leading-relaxed">
-                Warning: Please carefully review this configuration before using it in the KG Box. Incorrect wiring can damage the vehicle.
-            </p>
+<!-- Vehicle + KG Box (replaces warning banner slot) -->
+<div class="mb-stack-md bg-surface-container border border-outline/30 rounded p-6">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
+<div>
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Brand</p>
+<p id="car-brand" class="text-sm text-on-surface font-normal">—</p>
+</div>
+<div>
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Model</p>
+<p id="car-model" class="text-sm text-on-surface font-normal">—</p>
+</div>
+<div>
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Year</p>
+<p id="car-year" class="text-sm text-on-surface font-normal">—</p>
+</div>
+<div>
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">VIN</p>
+<p id="car-vin" class="text-sm font-mono text-primary/90 tracking-wide break-all">—</p>
+</div>
+</div>
+<div class="max-w-md">
+<label for="kg-box-select" class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-3">KG Box</label>
+<div class="relative">
+<select id="kg-box-select" class="w-full bg-surface border border-outline/40 text-on-surface text-sm rounded px-4 py-3 appearance-none focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all cursor-pointer">
+<option value="bx-9920">KG-BX-9920 (Production)</option>
+<option value="bx-8812">KG-BX-8812 (Lab)</option>
+<option value="bx-1104">KG-BX-1104 (Staging)</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
 <!-- Left Side: Configuration Controls -->
@@ -120,11 +150,8 @@
 <div class="bg-surface-container border border-outline/30 rounded p-6">
 <label class="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-3">Select Sensor / Actuator</label>
 <div class="relative">
-<select class="w-full bg-surface border border-outline/40 text-on-surface text-sm rounded px-4 py-3 appearance-none focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all cursor-pointer">
-<option>MAP Sensor - Signal Line</option>
-<option>Fuel Injector #1 - Control</option>
-<option>Camshaft Position Sensor</option>
-<option>Throttle Body Actuator</option>
+<select id="sensor-actuator-select" class="w-full bg-surface border border-outline/40 text-on-surface text-sm rounded px-4 py-3 appearance-none focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all cursor-pointer">
+<option value="">Loading from vehicle CSV…</option>
 </select>
 <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
 </div>
@@ -206,17 +233,17 @@
 </div>
 </section>
 </div>
-<!-- Right Side: Live Result Terminal -->
-<div class="lg:col-span-4 h-full">
-<section class="bg-[#000000] border border-outline/30 rounded h-full flex flex-col overflow-hidden">
-<div class="bg-surface-container-high border-b border-outline/30 px-4 py-3 flex justify-between items-center">
+<!-- Right Side: Live Result Terminal (50% height) + wiring strip -->
+<div class="lg:col-span-4 flex flex-col gap-gutter lg:min-h-0">
+<section class="bg-[#000000] border border-outline/30 rounded flex flex-col overflow-hidden h-[50vh] max-h-[50vh] min-h-[200px] shrink-0">
+<div class="bg-surface-container-high border-b border-outline/30 px-4 py-3 flex justify-between items-center shrink-0">
 <h3 class="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant flex items-center gap-2">
 <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
                             Live Result Area
                         </h3>
-<span class="text-[10px] text-on-surface-variant font-mono">ID: KG-BOX-092</span>
+<span id="live-result-box-id" class="text-[10px] text-on-surface-variant font-mono">ID: —</span>
 </div>
-<div class="flex-1 p-4 font-mono text-xs text-primary/80 overflow-y-auto terminal-scroll space-y-2">
+<div class="flex-1 min-h-0 p-4 font-mono text-xs text-primary/80 overflow-y-auto terminal-scroll space-y-2">
 <div class="flex gap-2">
 <span class="text-on-surface-variant opacity-50">[14:22:01]</span>
 <span>System initialized...</span>
@@ -227,7 +254,7 @@
 </div>
 <div class="flex gap-2">
 <span class="text-on-surface-variant opacity-50">[14:22:15]</span>
-<span class="text-white">Selected: MAP Sensor - Signal Line</span>
+<span class="text-white">Selected: <span id="terminal-selected-label">—</span></span>
 </div>
 <div class="flex gap-2">
 <span class="text-on-surface-variant opacity-50">[14:22:16]</span>
@@ -243,6 +270,16 @@
 </div>
 </div>
 </section>
+<div class="bg-surface-container border border-outline/30 rounded p-4 flex flex-col gap-3 shrink-0">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Wiring diagram</p>
+<div class="relative rounded border border-outline/40 overflow-hidden bg-black aspect-[2/1] max-h-32">
+<img id="wiring-thumb" src="" alt="Wiring diagram thumbnail" class="w-full h-full object-cover opacity-90"/>
+</div>
+<button type="button" id="btn-access-wiring" class="w-full py-3 border border-primary text-primary rounded text-[10px] font-bold uppercase tracking-widest hover:bg-primary/10 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">open_in_new</span>
+                    Access Wiring Diagram
+                </button>
+</div>
 </div>
 </div>
 <!-- Footer Actions -->
@@ -268,7 +305,37 @@
                 </button>
 </div>
 </footer>
+<!-- Warning moved to bottom of page -->
+<div class="mt-stack-md bg-warning/5 border border-warning/40 rounded p-4 flex items-start gap-4">
+<span class="material-symbols-outlined text-warning shrink-0">warning</span>
+<p class="text-xs font-bold text-warning uppercase tracking-widest leading-relaxed">
+                Warning: Please carefully review this configuration before using it in the KG Box. Incorrect wiring can damage the vehicle.
+            </p>
+</div>
 </main>
+<!-- Wiring diagram floating window -->
+<div id="wiring-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="wiring-modal-title">
+<div class="bg-surface border border-outline/40 rounded max-w-5xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+<div class="flex items-center justify-between gap-4 px-4 py-3 border-b border-outline/30 bg-surface-container-high shrink-0">
+<h2 id="wiring-modal-title" class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Wiring diagram</h2>
+<div class="flex items-center gap-2">
+<button type="button" id="wiring-zoom-out" class="p-2 rounded border border-outline/40 text-on-surface hover:border-primary hover:text-primary transition-colors" title="Zoom out" aria-label="Zoom out">
+<span class="material-symbols-outlined text-xl">remove</span>
+</button>
+<span id="wiring-zoom-pct" class="text-[11px] font-mono text-primary min-w-[3.5rem] text-center">100%</span>
+<button type="button" id="wiring-zoom-in" class="p-2 rounded border border-outline/40 text-on-surface hover:border-primary hover:text-primary transition-colors" title="Zoom in" aria-label="Zoom in">
+<span class="material-symbols-outlined text-xl">add</span>
+</button>
+<button type="button" id="wiring-zoom-reset" class="px-3 py-2 rounded border border-outline/40 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant hover:border-primary hover:text-primary transition-colors">Reset</button>
+<button type="button" id="wiring-modal-close" class="p-2 rounded border border-outline/40 text-on-surface-variant hover:text-error transition-colors ml-2" aria-label="Close">
+<span class="material-symbols-outlined text-xl">close</span>
+</button>
+</div>
+<div id="wiring-modal-scroll" class="flex-1 overflow-auto min-h-[50vh] max-h-[calc(90vh-4rem)] flex items-center justify-center p-6 bg-black touch-pan-x touch-pan-y">
+<img id="wiring-modal-img" src="" alt="Wiring diagram full view" class="max-w-none select-none"/>
+</div>
+</div>
+</div>
 <!-- Mobile Nav -->
 <nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center py-4 px-4 bg-surface border-t border-outline/30 z-50">
 <a class="text-primary" href="#">
@@ -281,4 +348,164 @@
 <span class="material-symbols-outlined">person</span>
 </a>
 </nav>
+<script>
+(function () {
+  var VEHICLE_CSV = {
+    "1": "type,name,channel\nsensor,MAP Sensor - Signal Line,S01\nactuator,Fuel Injector #1 - Control,A01\nsensor,Camshaft Position Sensor - Bank 1,S02\nactuator,Throttle Body Actuator - ETCS,A02\nsensor,Crankshaft Position Sensor,S03\nactuator,Ignition Coil #3 - Primary,A03",
+    "2": "type,name,channel\nsensor,MAF Sensor - Hot Wire,S10\nsensor,ECT Sensor #1 - Engine Coolant,S11\nactuator,VTC Oil Control Solenoid - Bank 1,A10\nsensor,Knock Sensor #1,S12\nactuator,Injector Cylinder 2,A11",
+    "3": "type,name,channel\nsensor,BMS Cell Voltage Tap - Module 1,S20\nactuator,Contactors - Pack Positive,A20\nsensor,Inverter Coolant Temp,S21\nactuator,Brake Regen Blending Valve,A21\nsensor,High Voltage Interlock Loop,S22",
+    "4": "type,name,channel\nsensor,High Voltage Battery - SOC Sensor,S30\nactuator,Electric A/C Compressor,A30\nsensor,Wallbox Pilot Signal,S31\nactuator,Heater Coolant Pump - HV,A31",
+    default: "type,name,channel\nsensor,MAP Sensor - Signal Line,S01\nactuator,Fuel Injector #1 - Control,A01\nsensor,Camshaft Position Sensor,S02\nactuator,Throttle Body Actuator,A02"
+  };
+
+  var VEHICLE_META = {
+    "1": { brand: "Toyota", model: "Camry XSE", year: "2023", vin: "4T1B11HK5KU123456", diagram: "https://placehold.co/1200x750/051005/3ee42f?text=Electrical+Wiring+Diagram" },
+    "2": { brand: "Honda", model: "Accord Sport", year: "2022", vin: "1HGCV1F34NA004321", diagram: "https://placehold.co/1200x750/0d1a0d/3ee42f?text=Accord+Wiring" },
+    "3": { brand: "Ford", model: "F-150 Lightning", year: "2024", vin: "1FTFW1ED5NFA99887", diagram: "https://placehold.co/1200x750/051005/bbcbb2?text=HV+Wiring+Overview" },
+    "4": { brand: "BMW", model: "i4 eDrive40", year: "2023", vin: "WBY31AW09PFN12345", diagram: "https://placehold.co/1200x750/152415/3ee42f?text=i4+Diagram" }
+  };
+
+  var KG_LABELS = { "bx-9920": "KG-BX-9920", "bx-8812": "KG-BX-8812", "bx-1104": "KG-BX-1104" };
+
+  function parseSensorCsv(csv) {
+    var lines = csv.trim().split(/\r?\n/);
+    if (lines.length < 2) return [];
+    var header = lines[0].split(",").map(function (h) { return h.trim().toLowerCase(); });
+    var typeIdx = header.indexOf("type");
+    var nameIdx = header.indexOf("name");
+    if (nameIdx < 0) return [];
+    var out = [];
+    for (var i = 1; i < lines.length; i++) {
+      if (!lines[i].trim()) continue;
+      var cols = lines[i].split(",");
+      var name = (cols[nameIdx] || "").trim();
+      if (!name) continue;
+      var typ = typeIdx >= 0 ? (cols[typeIdx] || "").trim().toLowerCase() : "";
+      out.push({ type: typ, name: name, label: typ ? typ.charAt(0).toUpperCase() + typ.slice(1) + ": " + name : name });
+    }
+    return out;
+  }
+
+  var params = new URLSearchParams(window.location.search);
+  var vehicleId = params.get("vehicle") || "1";
+  var csvText = VEHICLE_CSV[vehicleId] || VEHICLE_CSV.default;
+  var meta = VEHICLE_META[vehicleId] || VEHICLE_META["1"];
+
+  document.getElementById("car-brand").textContent = meta.brand;
+  document.getElementById("car-model").textContent = meta.model;
+  document.getElementById("car-year").textContent = meta.year;
+  document.getElementById("car-vin").textContent = meta.vin;
+
+  var diagramUrl = meta.diagram;
+  document.getElementById("wiring-thumb").src = diagramUrl;
+
+  var select = document.getElementById("sensor-actuator-select");
+  select.innerHTML = "";
+  var rows = parseSensorCsv(csvText);
+  if (!rows.length) {
+    var o = document.createElement("option");
+    o.value = "";
+    o.textContent = "No sensors/actuators in CSV";
+    select.appendChild(o);
+  } else {
+    rows.forEach(function (r, idx) {
+      var opt = document.createElement("option");
+      opt.value = String(idx);
+      opt.textContent = r.label;
+      opt.dataset.name = r.name;
+      select.appendChild(opt);
+    });
+  }
+
+  function syncTerminalSelection() {
+    var opt = select.options[select.selectedIndex];
+    var label = opt ? (opt.dataset.name || opt.textContent) : "—";
+    document.getElementById("terminal-selected-label").textContent = label;
+  }
+  select.addEventListener("change", syncTerminalSelection);
+  syncTerminalSelection();
+
+  var kgSelect = document.getElementById("kg-box-select");
+  var liveId = document.getElementById("live-result-box-id");
+
+  function syncKgDisplay() {
+    var v = kgSelect.value;
+    var lab = KG_LABELS[v] || v;
+    liveId.textContent = "ID: " + lab;
+  }
+  kgSelect.addEventListener("change", syncKgDisplay);
+
+  var urlKg = params.get("kgBox");
+  if (urlKg) {
+    for (var i = 0; i < kgSelect.options.length; i++) {
+      if (kgSelect.options[i].value === urlKg) {
+        kgSelect.selectedIndex = i;
+        break;
+      }
+    }
+  }
+  syncKgDisplay();
+
+  var modal = document.getElementById("wiring-modal");
+  var modalImg = document.getElementById("wiring-modal-img");
+  modalImg.src = diagramUrl;
+  var zoom = 1;
+  var ZOOM_STEP = 0.25;
+  var ZOOM_MIN = 0.5;
+  var ZOOM_MAX = 4;
+
+  var zoomPctEl = document.getElementById("wiring-zoom-pct");
+
+  function applyZoom() {
+    modalImg.style.transform = "scale(" + zoom + ")";
+    if (zoomPctEl) zoomPctEl.textContent = Math.round(zoom * 100) + "%";
+  }
+
+  document.getElementById("btn-access-wiring").addEventListener("click", function () {
+    zoom = 1;
+    applyZoom();
+    modal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  });
+
+  function closeWiring() {
+    modal.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+  document.getElementById("wiring-modal-close").addEventListener("click", closeWiring);
+  modal.addEventListener("click", function (e) {
+    if (e.target === modal) closeWiring();
+  });
+
+  document.getElementById("wiring-zoom-in").addEventListener("click", function () {
+    zoom = Math.min(ZOOM_MAX, zoom + ZOOM_STEP);
+    applyZoom();
+  });
+  document.getElementById("wiring-zoom-out").addEventListener("click", function () {
+    zoom = Math.max(ZOOM_MIN, zoom - ZOOM_STEP);
+    applyZoom();
+  });
+  document.getElementById("wiring-zoom-reset").addEventListener("click", function () {
+    zoom = 1;
+    applyZoom();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (modal.classList.contains("hidden")) return;
+    if (e.key === "Escape") closeWiring();
+  });
+
+  var scrollEl = document.getElementById("wiring-modal-scroll");
+  scrollEl.addEventListener("wheel", function (e) {
+    if (!e.ctrlKey && !e.metaKey) return;
+    e.preventDefault();
+    if (e.deltaY < 0) {
+      zoom = Math.min(ZOOM_MAX, zoom + ZOOM_STEP);
+    } else {
+      zoom = Math.max(ZOOM_MIN, zoom - ZOOM_STEP);
+    }
+    applyZoom();
+  }, { passive: false });
+})();
+</script>
 </body></html>
