@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>KG App Lite — Manage Brand Logic</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#00c600",
+            "on-surface": "#dbe6d3",
+            "on-surface-variant": "#bbcbb2",
+            "surface-container-low": "#151e12",
+            "surface-variant": "#2e372a",
+            surface: "#0d160a",
+          },
+          borderRadius: { DEFAULT: "6px", lg: "6px", xl: "6px", full: "9999px" },
+          fontFamily: { body: ["Space Grotesk", "sans-serif"] },
+        },
+      },
+    };
+  </script>
+  <style>
+    body { background-color: #0d160a; color: #dbe6d3; font-family: "Space Grotesk", sans-serif; font-weight: 300; }
+    .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24; }
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #0d160a; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #2e372a; border-radius: 6px; }
+    input, select, textarea { font-weight: 300 !important; }
+    .active-state-black:active { background-color: #000000 !important; color: #00c600 !important; }
+    .file-input-hidden { position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none; }
+  </style>
+</head>
+<body class="bg-[#0d160a] min-h-screen flex flex-col">
+  <header class="flex justify-between items-center w-full px-8 py-6 bg-[#0d160a] border-b border-[#2e372a] sticky top-0 z-50">
+    <div class="flex items-center gap-12">
+      <a href="admin-dashboard.html" class="flex items-center gap-2 group">
+        <div class="w-8 h-8 bg-[#00c600] flex items-center justify-center rounded-[6px] group-hover:opacity-90 transition-opacity">
+          <span class="material-symbols-outlined text-black font-bold">terminal</span>
+        </div>
+        <h1 class="text-xl font-medium text-[#00c600] tracking-tighter uppercase">KGAPP <span class="font-light opacity-60 lowercase">lite</span></h1>
+      </a>
+      <nav class="hidden md:flex items-center gap-8">
+        <a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] transition-colors" href="admin-dashboard.html">Dashboard</a>
+        <a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] transition-colors" href="#">Simulations</a>
+        <a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] transition-colors" href="my-vehicles.html">Vehicles</a>
+        <a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] transition-colors" href="admin-dashboard.html">Admin</a>
+        <a class="text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] border-b border-[#00c600]" href="manage-brand-logic.html">Brand logic</a>
+      </nav>
+    </div>
+    <div class="flex items-center gap-6">
+      <button type="button" class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" aria-label="Notifications">
+        <span class="material-symbols-outlined">notifications</span>
+      </button>
+      <button type="button" class="px-6 py-2 border border-[#00c600]/40 text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] rounded-[6px] hover:bg-[#00c600] hover:text-black transition-all active-state-black">
+        Login
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-1 flex flex-col pb-24 md:pb-8">
+    <div class="p-8 lg:p-12 flex flex-col gap-10 max-w-4xl mx-auto w-full">
+      <section class="flex flex-col gap-3">
+        <div class="flex flex-wrap items-center gap-2 text-[10px] font-medium tracking-[0.25em] uppercase text-on-surface-variant/60">
+          <a href="admin-dashboard.html" class="hover:text-[#00c600] transition-colors">Super Admin</a>
+          <span class="text-on-surface-variant/30">/</span>
+          <span class="text-[#00c600]">Manage Brand Logic</span>
+        </div>
+        <div class="flex items-center gap-2 text-[#00c600] mb-1">
+          <span class="text-[10px] font-medium tracking-[0.3em] uppercase">Configuration</span>
+          <div class="h-[1px] w-12 bg-[#00c600]/30"></div>
+        </div>
+        <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-normal text-on-surface leading-tight tracking-tight">Manage Brand Logic</h2>
+        <p class="text-base text-on-surface-variant max-w-2xl font-light leading-relaxed">
+          Define how a brand is interpreted from your source system: document the source type, attach reference visuals and tables, and leave clear instructions for technicians.
+        </p>
+      </section>
+
+      <form id="brand-logic-form" class="bg-[#151e12] border border-[#2e372a] rounded-[6px] p-8 flex flex-col gap-8" novalidate>
+        <div class="flex flex-col gap-2">
+          <label for="source-type" class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">Source Type</label>
+          <select id="source-type" name="sourceType" required class="bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface font-light p-4 rounded-[6px] appearance-none cursor-pointer">
+            <option value="" disabled selected>Select source type…</option>
+            <option value="original_manufacturer">Original Manufacturer</option>
+            <option value="autodata">AutoData</option>
+            <option value="alldata">ALLDATA</option>
+            <option value="mitchell1">Mitchell1</option>
+            <option value="identifix">Identifix</option>
+          </select>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="brand-name" class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">Brand name</label>
+          <input id="brand-name" name="brandName" type="text" required placeholder="e.g. Toyota, BMW, Ford…" class="bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface font-light p-4 rounded-[6px] placeholder:text-on-surface-variant/25"/>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-1">
+            <span class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">Visual example diagrams</span>
+            <span class="text-sm text-on-surface-variant/70 font-light">Upload one or more diagrams (PNG, JPG, WebP, GIF). Used as visual references for wiring or layout.</span>
+          </div>
+          <label class="flex flex-col items-center justify-center gap-3 min-h-[140px] border-2 border-dashed border-[#2e372a] rounded-[6px] bg-[#0d160a]/50 hover:border-[#00c600]/50 cursor-pointer transition-colors px-6 py-8">
+            <span class="material-symbols-outlined text-4xl text-[#00c600]/80">add_photo_alternate</span>
+            <span class="text-[11px] uppercase tracking-[0.2em] text-on-surface-variant">Drop images or click to browse</span>
+            <span class="text-[10px] text-on-surface-variant/50">Multiple files allowed</span>
+            <input id="diagram-files" name="diagrams" type="file" multiple accept="image/png,image/jpeg,image/webp,image/gif" class="file-input-hidden"/>
+          </label>
+          <div id="diagram-preview" class="grid grid-cols-2 sm:grid-cols-3 gap-3 empty:hidden custom-scrollbar max-h-[280px] overflow-y-auto"></div>
+          <ul id="diagram-file-list" class="text-sm text-on-surface-variant/80 space-y-1 font-mono text-[11px] empty:hidden"></ul>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-1">
+            <span class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">Reference table <span class="text-on-surface-variant/40 normal-case tracking-normal">(if available)</span></span>
+            <span class="text-sm text-on-surface-variant/70 font-light">Optional — pinouts, connector IDs, or lookup tables (CSV, Excel, or PDF).</span>
+          </div>
+          <label class="inline-flex items-center gap-3 px-4 py-3 bg-[#0d160a] border border-[#2e372a] rounded-[6px] hover:border-[#00c600]/40 cursor-pointer transition-colors w-full max-w-xl">
+            <span class="material-symbols-outlined text-[#00c600]">table_chart</span>
+            <span class="flex-1 text-sm text-on-surface-variant">Choose reference file…</span>
+            <input id="reference-table" name="referenceTable" type="file" accept=".csv,.tsv,.xlsx,.xls,.pdf,.txt,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" class="file-input-hidden"/>
+          </label>
+          <p id="reference-file-name" class="text-[11px] font-mono text-on-surface-variant/60 empty:hidden"></p>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="instructions" class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">Instructions</label>
+          <textarea id="instructions" name="instructions" rows="14" placeholder="Document decoding rules, caveats, trim-specific behavior, and anything technicians must follow when using this brand…" class="custom-scrollbar bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface font-light p-4 rounded-[6px] placeholder:text-on-surface-variant/25 min-h-[320px] resize-y leading-relaxed"></textarea>
+        </div>
+
+        <div id="form-status" class="hidden text-sm font-medium rounded-[6px] px-4 py-3 border border-[#00c600]/40 bg-[#00c600]/10 text-[#77ff61]" role="status"></div>
+
+        <div class="flex flex-wrap gap-4 pt-2 border-t border-[#2e372a]">
+          <button type="submit" class="px-10 py-4 bg-[#00c600] text-black font-medium text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:bg-[#77ff61] transition-all active:scale-[0.98] active-state-black">
+            Save brand logic
+          </button>
+          <button type="reset" class="px-8 py-4 border border-[#2e372a] text-on-surface-variant text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:border-on-surface-variant/40 hover:text-on-surface transition-colors">
+            Reset form
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center py-4 px-4 bg-[#0d160a] border-t border-[#2e372a] z-50">
+    <a href="admin-dashboard.html" class="text-on-surface-variant hover:text-[#00c600]"><span class="material-symbols-outlined">grid_view</span></a>
+    <button type="button" class="text-on-surface-variant hover:text-[#00c600]"><span class="material-symbols-outlined">analytics</span></button>
+    <a href="my-vehicles.html" class="text-on-surface-variant hover:text-[#00c600]"><span class="material-symbols-outlined">directions_car</span></a>
+    <a href="manage-brand-logic.html" class="text-[#00c600]"><span class="material-symbols-outlined">tune</span></a>
+  </nav>
+
+  <script>
+    (function () {
+      var diagramInput = document.getElementById("diagram-files");
+      var preview = document.getElementById("diagram-preview");
+      var fileList = document.getElementById("diagram-file-list");
+      var refInput = document.getElementById("reference-table");
+      var refName = document.getElementById("reference-file-name");
+      var form = document.getElementById("brand-logic-form");
+      var statusEl = document.getElementById("form-status");
+
+      function clearPreview() {
+        preview.innerHTML = "";
+        fileList.innerHTML = "";
+      }
+
+      diagramInput.addEventListener("change", function () {
+        clearPreview();
+        var files = diagramInput.files;
+        if (!files || !files.length) return;
+        for (var i = 0; i < files.length; i++) {
+          var f = files[i];
+          var li = document.createElement("li");
+          li.textContent = f.name + " (" + Math.round(f.size / 1024) + " KB)";
+          fileList.appendChild(li);
+          if (f.type.indexOf("image/") === 0) {
+            var wrap = document.createElement("div");
+            wrap.className = "relative aspect-video rounded-[6px] overflow-hidden border border-[#2e372a] bg-[#0d160a]";
+            var img = document.createElement("img");
+            img.alt = f.name;
+            img.className = "w-full h-full object-cover";
+            var url = URL.createObjectURL(f);
+            img.src = url;
+            (function (u) {
+              img.onload = function () {
+                URL.revokeObjectURL(u);
+              };
+            })(url);
+            wrap.appendChild(img);
+            preview.appendChild(wrap);
+          }
+        }
+      });
+
+      refInput.addEventListener("change", function () {
+        var f = refInput.files && refInput.files[0];
+        refName.textContent = f ? "Selected: " + f.name : "";
+        refName.classList.toggle("hidden", !f);
+      });
+
+      form.addEventListener("reset", function () {
+        clearPreview();
+        refName.textContent = "";
+        statusEl.classList.add("hidden");
+      });
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var source = document.getElementById("source-type").value;
+        var brand = document.getElementById("brand-name").value.trim();
+        if (!source || !brand) {
+          statusEl.textContent = "Please choose a source type and enter a brand name.";
+          statusEl.className = "text-sm font-medium rounded-[6px] px-4 py-3 border border-[#ffb4ab]/50 bg-[#93000a]/20 text-[#ffb4ab]";
+          statusEl.classList.remove("hidden");
+          return;
+        }
+        statusEl.textContent = "Prototype: brand logic saved locally (no server). Replace this with API persistence when backend is ready.";
+        statusEl.className = "text-sm font-medium rounded-[6px] px-4 py-3 border border-[#00c600]/40 bg-[#00c600]/10 text-[#77ff61]";
+        statusEl.classList.remove("hidden");
+      });
+
+      var dropZone = diagramInput.closest("label");
+      if (dropZone) {
+        ["dragenter", "dragover"].forEach(function (ev) {
+          dropZone.addEventListener(ev, function (e) {
+            e.preventDefault();
+            dropZone.classList.add("border-[#00c600]/60");
+          });
+        });
+        ["dragleave", "drop"].forEach(function (ev) {
+          dropZone.addEventListener(ev, function (e) {
+            e.preventDefault();
+            dropZone.classList.remove("border-[#00c600]/60");
+          });
+        });
+        dropZone.addEventListener("drop", function (e) {
+          var dt = e.dataTransfer;
+          if (!dt || !dt.files || !dt.files.length) return;
+          var out = new DataTransfer();
+          for (var j = 0; j < dt.files.length; j++) {
+            out.items.add(dt.files[j]);
+          }
+          diagramInput.files = out.files;
+          diagramInput.dispatchEvent(new Event("change", { bubbles: true }));
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
