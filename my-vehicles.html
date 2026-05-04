@@ -15,7 +15,7 @@
                     "colors": {
                         "primary": "#00c600",
                         "background": "#0A0F0A",
-                        "surface": "#1A2A1A",
+                        "surface": "#091F03",
                         "on-surface": "#FFFFFF",
                         "on-surface-variant": "rgba(255,255,255,0.72)",
                         "outline": "rgba(0,198,0,0.28)",
@@ -57,8 +57,8 @@
 <span class="text-xl font-normal tracking-tight text-white">KGAPP <span class="font-thin opacity-70 text-xs uppercase tracking-widest ml-1">Pro v1.3</span></span>
 </div>
 <nav class="hidden md:flex items-center gap-6">
-<a class="text-white font-thin hover:text-primary transition-colors text-sm uppercase tracking-widest" href="#">Dashboard</a>
-<a class="text-white font-normal text-sm uppercase tracking-widest border-b border-primary" href="#">Vehicles</a>
+<a class="text-white font-thin hover:text-primary transition-colors text-sm uppercase tracking-widest" href="admin-dashboard.html">Dashboard</a>
+<a class="text-white font-normal text-sm uppercase tracking-widest border-b border-primary" href="vehicle-management.html">Vehicles</a>
 <a class="text-on-surface-variant font-thin hover:text-primary transition-colors text-sm uppercase tracking-widest" href="#">Analytics</a>
 </nav>
 </div>
@@ -77,15 +77,15 @@
 <h1 class="text-4xl font-normal tracking-tight text-on-surface mb-2">My Vehicles</h1>
 <p class="text-on-surface-variant font-thin max-w-xl">Manage your tactical fleet and initiate real-time environmental simulations for autonomous deployment units.</p>
 </div>
-<button class="border border-[#00C600] text-white bg-transparent px-8 py-3 rounded-[6px] hover:bg-[rgba(0,198,0,0.12)] transition-all text-sm uppercase tracking-widest flex items-center gap-2 font-thin">
+<a href="vehicle-management.html" class="border border-[#00C600] text-white bg-transparent px-8 py-3 rounded-[6px] hover:bg-[rgba(0,198,0,0.12)] transition-all text-sm uppercase tracking-widest inline-flex items-center gap-2 font-thin">
 <span class="material-symbols-outlined">add</span>
 <span>Add New Vehicle</span>
-</button>
+</a>
 </div>
 <!-- Vehicle List -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 <!-- Vehicle Card 1 (Active/Selected) -->
-<div class="active-element border border-primary p-6 rounded-[6px] flex flex-col gap-6 group">
+<div class="active-element bg-[#091F03] border border-primary p-6 rounded-[6px] flex flex-col gap-6 group">
 <div class="flex justify-between items-start">
 <div>
 <span class="text-primary text-[10px] uppercase tracking-[0.2em] font-normal">Interceptor Class</span>
@@ -113,7 +113,7 @@
 </button>
 </div>
 <!-- Vehicle Card 2 -->
-<div class="bg-surface border border-outline p-6 rounded-[6px] flex flex-col gap-6 hover:border-primary/50 transition-colors">
+<div class="bg-[#091F03] border border-outline p-6 rounded-[6px] flex flex-col gap-6 hover:border-primary/50 transition-colors">
 <div class="flex justify-between items-start">
 <div>
 <span class="text-on-surface-variant text-[10px] uppercase tracking-[0.2em] font-light">Heavy Utility</span>
@@ -141,7 +141,7 @@
 </button>
 </div>
 <!-- Vehicle Card 3 -->
-<div class="bg-surface border border-outline p-6 rounded-[6px] flex flex-col gap-6 hover:border-primary/50 transition-colors">
+<div class="bg-[#091F03] border border-outline p-6 rounded-[6px] flex flex-col gap-6 hover:border-primary/50 transition-colors">
 <div class="flex justify-between items-start">
 <div>
 <span class="text-on-surface-variant text-[10px] uppercase tracking-[0.2em] font-light">Recon Drone</span>

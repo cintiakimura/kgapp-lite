@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>KG App Lite — Vehicle management</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/kg-theme.css"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#00c600",
+            "on-surface": "#FFFFFF",
+            "on-surface-variant": "rgba(255,255,255,0.72)",
+            "surface-container-low": "#091F03",
+            "surface-variant": "rgba(0,198,0,0.22)",
+            surface: "#0A0F0A",
+          },
+          borderRadius: { DEFAULT: "6px", lg: "6px", xl: "6px", full: "9999px" },
+          fontFamily: {
+            sans: ["LL Akkurat", "Akkurat", "Akkurat Std", "Linotype Akkurat", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Helvetica Neue", "Arial", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    body { background-color: #0A0F0A; color: #FFFFFF; font-family: "LL Akkurat", "Akkurat", "Akkurat Std", "Linotype Akkurat", ui-sans-serif, system-ui, sans-serif; font-weight: 200; }
+    .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24; }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0,198,0,0.22); border-radius: 6px; }
+    input, select, textarea { font-weight: 200 !important; }
+    .file-input-hidden { position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none; }
+  </style>
+</head>
+<body class="bg-[#0A0F0A] min-h-screen flex flex-col font-sans antialiased">
+  <script src="js/role.js"></script>
+  <script>
+    (function () {
+      if (!window.KGAPP || !window.KGAPP.readIsSuperAdmin()) {
+        window.location.replace("company-dashboard.html");
+      }
+    })();
+  </script>
+
+  <header class="flex justify-between items-center w-full px-6 md:px-8 py-6 bg-[#0A0F0A] border-b border-[rgba(0,198,0,0.28)] sticky top-0 z-50">
+    <div class="flex items-center gap-8 md:gap-12 min-w-0">
+      <a href="admin-dashboard.html" class="flex items-center gap-3 shrink-0 min-w-0">
+        <img src="assets/kg-logo.png" alt="KG" width="32" height="32" class="kg-brand-logo"/>
+        <span class="text-lg md:text-xl font-normal text-white tracking-tighter uppercase truncate">KGAPP <span class="font-thin lowercase opacity-70">lite</span></span>
+      </a>
+      <nav class="hidden md:flex items-center flex-wrap gap-x-6 gap-y-2 text-[10px] md:text-[11px] font-thin uppercase tracking-[0.2em]">
+        <a class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="admin-dashboard.html">Dashboard</a>
+        <a class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="#">Simulations</a>
+        <a class="text-[#00c600] border-b border-[#00c600] pb-0.5" href="vehicle-management.html">Vehicles</a>
+        <a class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="admin-dashboard.html">Admin</a>
+        <a class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="manage-brand-logic.html">Brand logic</a>
+        <a class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="manage-platform-logic.html">Platform logic</a>
+      </nav>
+    </div>
+    <div class="flex items-center gap-2 md:gap-4 shrink-0">
+      <a href="create-company.html" class="px-3 md:px-5 py-2 border border-[#00C600] text-white text-[10px] md:text-[11px] font-thin uppercase tracking-[0.2em] rounded-[6px] bg-transparent hover:bg-[rgba(0,198,0,0.12)] transition-colors whitespace-nowrap">Sign up</a>
+      <button type="button" class="px-3 md:px-6 py-2 border border-[#00C600] text-white text-[10px] md:text-[11px] font-thin uppercase tracking-[0.2em] rounded-[6px] bg-transparent hover:bg-[rgba(0,198,0,0.12)] transition-colors whitespace-nowrap">Login</button>
+    </div>
+  </header>
+
+  <main class="flex-1 flex flex-col px-6 md:px-10 lg:px-12 py-10 max-w-5xl mx-auto w-full pb-24">
+    <section class="flex flex-col gap-3 mb-10">
+      <div class="flex flex-wrap items-center gap-2 text-[10px] font-thin tracking-[0.25em] uppercase text-on-surface-variant/60">
+        <a class="hover:text-[#00c600] transition-colors" href="admin-dashboard.html">Super Admin</a>
+        <span class="text-on-surface-variant/30">/</span>
+        <span class="text-[#00c600]">Vehicle management</span>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-normal text-white tracking-tight">Vehicle management</h1>
+      <p class="text-on-surface-variant font-thin max-w-3xl leading-relaxed">
+        Register a vehicle, attach the electrical wiring diagram and pin CSV, then review how each row maps to the diagram.
+        Automated matching against Auto Data and OEM diagram styles will plug in here once documentation is loaded.
+      </p>
+    </section>
+
+    <!-- Vehicle identity -->
+    <section class="bg-[#091F03] border border-[rgba(0,198,0,0.28)] rounded-[6px] p-6 md:p-8 mb-8">
+      <h2 class="text-lg font-normal text-white mb-6">Vehicle details</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="flex flex-col gap-2">
+          <label class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/70" for="vm-brand">Brand</label>
+          <input id="vm-brand" type="text" class="bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-white p-4 rounded-[6px] placeholder:text-on-surface-variant/30" placeholder="e.g. Toyota" autocomplete="off"/>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/70" for="vm-model">Model</label>
+          <input id="vm-model" type="text" class="bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-white p-4 rounded-[6px] placeholder:text-on-surface-variant/30" placeholder="e.g. Camry XSE" autocomplete="off"/>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/70" for="vm-year">Year</label>
+          <input id="vm-year" type="number" min="1900" max="2100" class="bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-white p-4 rounded-[6px] placeholder:text-on-surface-variant/30" placeholder="2024" autocomplete="off"/>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/70" for="vm-vin">VIN</label>
+          <input id="vm-vin" type="text" class="bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-white p-4 rounded-[6px] placeholder:text-on-surface-variant/30 font-mono text-sm" placeholder="17-character VIN" maxlength="32" autocomplete="off"/>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diagram type -->
+    <section class="bg-[#091F03] border border-[rgba(0,198,0,0.28)] rounded-[6px] p-6 md:p-8 mb-8">
+      <h2 class="text-lg font-normal text-white mb-2">Wiring diagram source</h2>
+      <p class="text-sm text-on-surface-variant font-thin mb-6 max-w-3xl">
+        Four diagram families are supported: three Auto Data variants plus one original manufacturer diagram. Choose the type that matches the file you upload so the matcher can apply the right rules when documentation is connected.
+      </p>
+      <div class="flex flex-col gap-3" id="diagram-type-group">
+        <label class="flex items-start gap-3 cursor-pointer rounded-[6px] border border-[rgba(0,198,0,0.28)] bg-[#0A0F0A]/60 p-4 hover:border-[#00c600]/50 transition-colors">
+          <input type="radio" name="diagramType" value="autodata_1" class="mt-1 border-[rgba(0,198,0,0.28)] text-[#00c600] focus:ring-[#00c600]"/>
+          <span><span class="text-white font-normal block text-sm">Auto Data — type 1</span><span class="text-on-surface-variant font-thin text-xs">First Auto Data wiring layout convention.</span></span>
+        </label>
+        <label class="flex items-start gap-3 cursor-pointer rounded-[6px] border border-[rgba(0,198,0,0.28)] bg-[#0A0F0A]/60 p-4 hover:border-[#00c600]/50 transition-colors">
+          <input type="radio" name="diagramType" value="autodata_2" class="mt-1 border-[rgba(0,198,0,0.28)] text-[#00c600] focus:ring-[#00c600]"/>
+          <span><span class="text-white font-normal block text-sm">Auto Data — type 2</span><span class="text-on-surface-variant font-thin text-xs">Second Auto Data wiring layout convention.</span></span>
+        </label>
+        <label class="flex items-start gap-3 cursor-pointer rounded-[6px] border border-[rgba(0,198,0,0.28)] bg-[#0A0F0A]/60 p-4 hover:border-[#00c600]/50 transition-colors">
+          <input type="radio" name="diagramType" value="autodata_3" class="mt-1 border-[rgba(0,198,0,0.28)] text-[#00c600] focus:ring-[#00c600]"/>
+          <span><span class="text-white font-normal block text-sm">Auto Data — type 3</span><span class="text-on-surface-variant font-thin text-xs">Third Auto Data wiring layout convention.</span></span>
+        </label>
+        <label class="flex items-start gap-3 cursor-pointer rounded-[6px] border border-[rgba(0,198,0,0.28)] bg-[#0A0F0A]/60 p-4 hover:border-[#00c600]/50 transition-colors">
+          <input type="radio" name="diagramType" value="oem" checked class="mt-1 border-[rgba(0,198,0,0.28)] text-[#00c600] focus:ring-[#00c600]"/>
+          <span><span class="text-white font-normal block text-sm">Original manufacturer diagram</span><span class="text-on-surface-variant font-thin text-xs">OEM-published electrical scheme (non–Auto Data).</span></span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Uploads -->
+    <section class="bg-[#091F03] border border-[rgba(0,198,0,0.28)] rounded-[6px] p-6 md:p-8 mb-8">
+      <h2 class="text-lg font-normal text-white mb-6">Files</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="flex flex-col gap-3">
+          <label class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/70">Electrical wiring diagram</label>
+          <label id="diagram-drop" class="flex flex-col items-center justify-center gap-2 min-h-[140px] border-2 border-dashed border-[rgba(0,198,0,0.28)] rounded-[6px] bg-[#0A0F0A]/50 hover:border-[#00c600]/50 cursor-pointer transition-colors px-6 py-8">
+            <span class="material-symbols-outlined text-4xl text-[#00c600]/80">add_photo_alternate</span>
+            <span class="text-sm text-on-surface-variant font-thin text-center">Drop image or PDF, or click to browse</span>
+            <span id="diagram-file-label" class="text-xs text-[#00c600] font-thin truncate max-w-full px-2">No file selected</span>
+            <input id="diagram-file" type="file" accept="image/*,.pdf,application/pdf" class="file-input-hidden"/>
+          </label>
+        </div>
+        <div class="flex flex-col gap-3">
+          <label class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/70">Pin list (CSV)</label>
+          <p class="text-xs text-on-surface-variant font-thin">Columns should include pin, sensor or actuator name, wire color, and function (header names can vary slightly).</p>
+          <label id="csv-drop" class="flex flex-col items-center justify-center gap-2 min-h-[140px] border-2 border-dashed border-[rgba(0,198,0,0.28)] rounded-[6px] bg-[#0A0F0A]/50 hover:border-[#00c600]/50 cursor-pointer transition-colors px-6 py-8">
+            <span class="material-symbols-outlined text-4xl text-[#00c600]/80">table</span>
+            <span class="text-sm text-on-surface-variant font-thin text-center">Drop <code class="text-white/90">.csv</code> or click to browse</span>
+            <span id="csv-file-label" class="text-xs text-[#00c600] font-thin truncate max-w-full px-2">No file selected</span>
+            <input id="csv-file" type="file" accept=".csv,text/csv" class="file-input-hidden"/>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mapping table -->
+    <section class="bg-[#091F03] border border-[rgba(0,198,0,0.28)] rounded-[6px] p-6 md:p-8 mb-8">
+      <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+        <div>
+          <h2 class="text-lg font-normal text-white mb-1">CSV ↔ diagram mapping</h2>
+          <p class="text-sm text-on-surface-variant font-thin max-w-2xl">
+            Each row is a pin from your CSV. After automated matching ships, suggestions will appear in “Diagram ref”.
+            For now, set <strong class="text-white font-normal">Reviewed</strong> when you are sure the pin is correctly tied to the diagram, or <strong class="text-white font-normal">Needs review</strong> when you are not certain.
+          </p>
+        </div>
+      </div>
+      <div class="overflow-x-auto custom-scrollbar rounded-[6px] border border-[rgba(0,198,0,0.2)]">
+        <table class="w-full text-left text-sm min-w-[720px]">
+          <thead>
+            <tr class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60 border-b border-[rgba(0,198,0,0.28)]">
+              <th class="p-4 font-normal">Pin</th>
+              <th class="p-4 font-normal">Sensor / actuator</th>
+              <th class="p-4 font-normal">Color</th>
+              <th class="p-4 font-normal">Function</th>
+              <th class="p-4 font-normal">Diagram ref</th>
+              <th class="p-4 font-normal text-right">Status</th>
+            </tr>
+          </thead>
+          <tbody id="mapping-body" class="divide-y divide-[rgba(0,198,0,0.15)] text-on-surface font-thin">
+            <tr id="mapping-empty">
+              <td colspan="6" class="p-8 text-center text-on-surface-variant font-thin">Upload a CSV to populate pin rows.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div id="vm-status" class="hidden mb-6 text-sm font-thin rounded-[6px] px-4 py-3 border border-[rgba(0,198,0,0.35)] bg-[#0A0F0A]" role="status"></div>
+
+    <div class="flex flex-wrap gap-4">
+      <button type="button" id="vm-save" class="px-10 py-4 bg-transparent border border-[#00C600] text-white font-thin text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:bg-[rgba(0,198,0,0.15)] transition-colors">
+        Save vehicle
+      </button>
+      <a href="my-vehicles.html" class="inline-flex items-center justify-center px-8 py-4 border border-[rgba(0,198,0,0.35)] text-on-surface-variant font-thin text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:border-[#00c600]/50 hover:text-white transition-colors">
+        View fleet list
+      </a>
+    </div>
+  </main>
+
+  <nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center py-4 px-2 bg-[#0A0F0A] border-t border-[rgba(0,198,0,0.28)] z-50">
+    <a href="admin-dashboard.html" class="text-on-surface-variant hover:text-[#00c600]" title="Dashboard"><span class="material-symbols-outlined">grid_view</span></a>
+    <a href="vehicle-management.html" class="text-[#00c600]" title="Vehicles"><span class="material-symbols-outlined">directions_car</span></a>
+    <a href="manage-brand-logic.html" class="text-on-surface-variant hover:text-[#00c600]" title="Brand logic"><span class="material-symbols-outlined">tune</span></a>
+    <a href="manage-platform-logic.html" class="text-on-surface-variant hover:text-[#00c600]" title="Platform logic"><span class="material-symbols-outlined">hub</span></a>
+  </nav>
+
+  <script>
+    (function () {
+      var STORAGE_KEY = "kgapp_vehicles_v1";
+
+      function parseCSVLine(line) {
+        var out = [];
+        var cur = "";
+        var inQ = false;
+        for (var i = 0; i < line.length; i++) {
+          var c = line[i];
+          if (c === '"') {
+            inQ = !inQ;
+            continue;
+          }
+          if (!inQ && c === ",") {
+            out.push(cur.trim());
+            cur = "";
+            continue;
+          }
+          cur += c;
+        }
+        out.push(cur.trim());
+        return out;
+      }
+
+      function normHeader(s) {
+        return String(s || "")
+          .toLowerCase()
+          .replace(/\s+/g, " ")
+          .trim();
+      }
+
+      function pickColumn(headers, candidates) {
+        for (var i = 0; i < headers.length; i++) {
+          var h = normHeader(headers[i]);
+          for (var j = 0; j < candidates.length; j++) {
+            if (h.indexOf(candidates[j]) !== -1) return i;
+          }
+        }
+        return -1;
+      }
+
+      function parseCSV(text) {
+        var lines = String(text || "")
+          .split(/\r?\n/)
+          .map(function (l) {
+            return l.trim();
+          })
+          .filter(Boolean);
+        if (!lines.length) return { headers: [], rows: [] };
+        var headers = parseCSVLine(lines[0]);
+        var rows = [];
+        for (var r = 1; r < lines.length; r++) {
+          rows.push(parseCSVLine(lines[r]));
+        }
+        return { headers: headers, rows: rows };
+      }
+
+      var mappingRows = [];
+
+      function renderMapping() {
+        var tbody = document.getElementById("mapping-body");
+        tbody.innerHTML = "";
+        if (!mappingRows.length) {
+          var tr0 = document.createElement("tr");
+          tr0.id = "mapping-empty";
+          tr0.innerHTML =
+            '<td colspan="6" class="p-8 text-center text-on-surface-variant font-thin">Upload a CSV to populate pin rows.</td>';
+          tbody.appendChild(tr0);
+          return;
+        }
+        mappingRows.forEach(function (row, idx) {
+          var tr = document.createElement("tr");
+          tr.className = "hover:bg-[#0A0F0A]/40";
+          var status = row.status === "reviewed" ? "reviewed" : "needs";
+          var statusCell =
+            status === "reviewed"
+              ? '<span class="inline-flex items-center gap-1 text-[#00c600] font-normal"><span class="material-symbols-outlined text-lg leading-none">check_circle</span> Reviewed</span>'
+              : '<span class="inline-flex items-center gap-1 text-amber-300/90 font-thin"><span class="material-symbols-outlined text-lg leading-none">help</span> Needs review</span>';
+          tr.innerHTML =
+            "<td class=\"p-4 font-mono text-xs\">" +
+            escapeHtml(row.pin) +
+            "</td><td class=\"p-4\">" +
+            escapeHtml(row.name) +
+            "</td><td class=\"p-4\">" +
+            escapeHtml(row.color) +
+            "</td><td class=\"p-4\">" +
+            escapeHtml(row.func) +
+            "</td><td class=\"p-4 text-on-surface-variant text-xs\">" +
+            escapeHtml(row.diagramRef || "—") +
+            '</td><td class="p-4 text-right whitespace-nowrap">' +
+            statusCell +
+            ' <button type="button" class="ml-2 text-[10px] uppercase tracking-widest border border-[rgba(0,198,0,0.35)] px-2 py-1 rounded-[6px] text-white hover:bg-[rgba(0,198,0,0.12)] vm-toggle" data-i="' +
+            idx +
+            '">Toggle</button></td>';
+          tbody.appendChild(tr);
+        });
+        tbody.querySelectorAll(".vm-toggle").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var i = parseInt(btn.getAttribute("data-i"), 10);
+            if (mappingRows[i]) {
+              mappingRows[i].status = mappingRows[i].status === "reviewed" ? "needs" : "reviewed";
+              renderMapping();
+            }
+          });
+        });
+      }
+
+      function escapeHtml(s) {
+        var d = document.createElement("div");
+        d.textContent = s == null ? "" : String(s);
+        return d.innerHTML;
+      }
+
+      function applyCSV(text) {
+        var parsed = parseCSV(text);
+        var H = parsed.headers;
+        var idxPin = pickColumn(H, ["pin", "terminal", "connector"]);
+        var idxName = pickColumn(H, ["sensor", "actuator", "name", "description", "label"]);
+        var idxColor = pickColumn(H, ["color", "wire", "cable"]);
+        var idxFn = pickColumn(H, ["function", "role", "signal"]);
+        if (idxPin < 0) idxPin = 0;
+        if (idxName < 0) idxName = 1;
+        if (idxColor < 0) idxColor = 2;
+        if (idxFn < 0) idxFn = 3;
+        mappingRows = [];
+        parsed.rows.forEach(function (cells) {
+          if (!cells.length || cells.every(function (c) { return !c; })) return;
+          mappingRows.push({
+            pin: cells[idxPin] || "",
+            name: cells[idxName] || "",
+            color: cells[idxColor] || "",
+            func: cells[idxFn] || "",
+            diagramRef: "",
+            status: "needs",
+          });
+        });
+        renderMapping();
+      }
+
+      function wireDrop(clickLabel, input, labelEl) {
+        function setName(files) {
+          if (files && files[0]) labelEl.textContent = files[0].name;
+          else labelEl.textContent = "No file selected";
+        }
+        clickLabel.addEventListener("click", function () {
+          input.click();
+        });
+        input.addEventListener("change", function () {
+          setName(input.files);
+        });
+        ["dragenter", "dragover"].forEach(function (ev) {
+          clickLabel.addEventListener(ev, function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            clickLabel.classList.add("border-[#00c600]/60");
+          });
+        });
+        clickLabel.addEventListener("dragleave", function (e) {
+          e.preventDefault();
+          clickLabel.classList.remove("border-[#00c600]/60");
+        });
+        clickLabel.addEventListener("drop", function (e) {
+          e.preventDefault();
+          clickLabel.classList.remove("border-[#00c600]/60");
+          var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+          if (!f) return;
+          if (input.id === "csv-file" && f.name && f.name.toLowerCase().indexOf(".csv") === -1) return;
+          try {
+            input.files = e.dataTransfer.files;
+          } catch (err) {}
+          setName(input.files);
+          if (input.id === "csv-file" && f) {
+            var reader = new FileReader();
+            reader.onload = function () {
+              applyCSV(reader.result);
+            };
+            reader.readAsText(f);
+          }
+        });
+      }
+
+      wireDrop(document.getElementById("diagram-drop"), document.getElementById("diagram-file"), document.getElementById("diagram-file-label"));
+      wireDrop(document.getElementById("csv-drop"), document.getElementById("csv-file"), document.getElementById("csv-file-label"));
+
+      document.getElementById("csv-file").addEventListener("change", function (e) {
+        var f = e.target.files && e.target.files[0];
+        if (!f) return;
+        var reader = new FileReader();
+        reader.onload = function () {
+          applyCSV(reader.result);
+        };
+        reader.readAsText(f);
+      });
+
+      function selectedDiagramType() {
+        var r = document.querySelector('input[name="diagramType"]:checked');
+        return r ? r.value : "oem";
+      }
+
+      document.getElementById("vm-save").addEventListener("click", function () {
+        var brand = document.getElementById("vm-brand").value.trim();
+        var model = document.getElementById("vm-model").value.trim();
+        var year = document.getElementById("vm-year").value.trim();
+        var vin = document.getElementById("vm-vin").value.trim();
+        if (!brand || !model || !year || !vin) {
+          showStatus("Fill in brand, model, year, and VIN before saving.", true);
+          return;
+        }
+        var diagramInput = document.getElementById("diagram-file");
+        var diagramName = diagramInput.files && diagramInput.files[0] ? diagramInput.files[0].name : "";
+        var csvInput = document.getElementById("csv-file");
+        var csvName = csvInput.files && csvInput.files[0] ? csvInput.files[0].name : "";
+        var list = [];
+        try {
+          var raw = localStorage.getItem(STORAGE_KEY);
+          list = raw ? JSON.parse(raw) : [];
+        } catch (e) {
+          list = [];
+        }
+        var entry = {
+          id: "vm_" + Date.now(),
+          brand: brand,
+          model: model,
+          year: year,
+          vin: vin,
+          diagramType: selectedDiagramType(),
+          diagramFileName: diagramName,
+          csvFileName: csvName,
+          mapping: mappingRows.slice(),
+          savedAt: new Date().toISOString(),
+        };
+        list.push(entry);
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+        } catch (e2) {
+          showStatus("Could not save to browser storage.", true);
+          return;
+        }
+        showStatus("Vehicle saved locally (" + list.length + " in list). Diagram and CSV files are not stored in the browser—wire an API to persist binaries.", false);
+        mappingRows = [];
+        document.getElementById("csv-file").value = "";
+        document.getElementById("diagram-file").value = "";
+        document.getElementById("csv-file-label").textContent = "No file selected";
+        document.getElementById("diagram-file-label").textContent = "No file selected";
+        renderMapping();
+      });
+
+      function showStatus(msg, isError) {
+        var el = document.getElementById("vm-status");
+        el.textContent = msg;
+        el.classList.remove("hidden", "border-red-400/50", "text-red-300");
+        if (isError) {
+          el.classList.add("border-red-400/50", "text-red-300");
+        }
+        el.classList.remove("hidden");
+      }
+    })();
+  </script>
+</body>
+</html>
