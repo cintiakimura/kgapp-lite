@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>KG App Lite — Create Company</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/kg-theme.css"/>
   <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "on-surface": "#dbe6d3",
-            "on-surface-variant": "#bbcbb2",
-            surface: "#0d160a",
+            "on-surface": "#FFFFFF",
+            "on-surface-variant": "rgba(255,255,255,0.72)",
+            surface: "#0A0F0A",
           },
           borderRadius: { DEFAULT: "6px" },
         },
@@ -23,20 +23,18 @@
     };
   </script>
   <style>
-    body { background-color: #0d160a; color: #dbe6d3; font-family: "Space Grotesk", sans-serif; font-weight: 300; }
+    body { background-color: #0A0F0A; color: #FFFFFF; font-family: "Akurat", sans-serif; font-weight: 200; }
     .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24; }
     input { font-weight: 300 !important; }
     .active-state-black:active { background-color: #000000 !important; color: #00c600 !important; }
   </style>
 </head>
-<body class="bg-[#0d160a] min-h-screen flex flex-col">
-  <header class="flex justify-between items-center w-full px-6 md:px-8 py-6 bg-[#0d160a] border-b border-[#2e372a] sticky top-0 z-50">
+<body class="bg-[#0A0F0A] min-h-screen flex flex-col">
+  <header class="flex justify-between items-center w-full px-6 md:px-8 py-6 bg-[#0A0F0A] border-b border-[rgba(0,198,0,0.28)] sticky top-0 z-50">
     <div class="flex items-center gap-8 md:gap-12 min-w-0">
-      <a href="landing.html" class="flex items-center gap-2 shrink-0">
-        <div class="w-8 h-8 bg-[#00c600] flex items-center justify-center rounded-[6px]">
-          <span class="material-symbols-outlined text-black font-bold text-xl">terminal</span>
-        </div>
-        <span class="text-lg md:text-xl font-medium text-[#00c600] tracking-tighter uppercase truncate">KGAPP <span class="font-light opacity-60 lowercase">lite</span></span>
+      <a href="landing.html" class="flex items-center gap-3 shrink-0 min-w-0">
+        <img src="assets/kg-logo.png" alt="KG" width="32" height="32" class="kg-brand-logo"/>
+        <span class="text-lg md:text-xl font-normal text-white tracking-tighter uppercase truncate">KGAPP <span class="font-thin lowercase opacity-70">lite</span></span>
       </a>
       <nav class="hidden sm:flex items-center gap-4 md:gap-8 text-[10px] md:text-[11px] font-medium uppercase tracking-[0.15em] md:tracking-[0.2em]">
         <a class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="landing.html">Home</a>
@@ -44,7 +42,7 @@
       </nav>
     </div>
     <div class="flex items-center gap-2 md:gap-4 shrink-0">
-      <a href="company-dashboard.html" class="px-3 md:px-6 py-2 border border-[#00c600]/40 text-[#00c600] text-[10px] md:text-[11px] font-medium uppercase tracking-[0.15em] md:tracking-[0.2em] rounded-[6px] hover:bg-[#00c600] hover:text-black transition-all whitespace-nowrap">
+      <a href="company-dashboard.html" class="px-3 md:px-6 py-2 border border-[#00C600] text-white text-[10px] md:text-[11px] font-thin uppercase tracking-[0.15em] md:tracking-[0.2em] rounded-[6px] bg-transparent hover:bg-[rgba(0,198,0,0.12)] transition-all whitespace-nowrap">
         Login
       </a>
     </div>
@@ -73,40 +71,40 @@
       </section>
 
       <form id="create-company-form" class="flex flex-col gap-10" novalidate>
-        <div class="bg-[#151e12] border border-[#2e372a] rounded-[6px] p-6 md:p-8 flex flex-col gap-6">
+        <div class="bg-[#1A2A1A] border border-[rgba(0,198,0,0.28)] rounded-[6px] p-6 md:p-8 flex flex-col gap-6">
           <h2 class="text-lg text-[#00c600] font-normal tracking-tight">Company details</h2>
           <div class="flex flex-col gap-2">
             <label for="admin-email" class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Your work email</label>
             <input id="admin-email" name="adminEmail" type="email" required autocomplete="email"
-              class="bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface p-4 rounded-[6px] placeholder:text-on-surface-variant/25"
+              class="bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface p-4 rounded-[6px] placeholder:text-on-surface-variant/25"
               placeholder="you@company.com"/>
             <p class="text-xs text-on-surface-variant/70 font-light">Addresses ending in <span id="domain-hint" class="font-mono text-on-surface-variant"></span> get Super Admin access (prototype: stored in this browser only).</p>
           </div>
           <div class="flex flex-col gap-2">
             <label for="company-name" class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Company name</label>
             <input id="company-name" name="companyName" type="text" required autocomplete="organization"
-              class="bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface p-4 rounded-[6px] placeholder:text-on-surface-variant/25"
+              class="bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface p-4 rounded-[6px] placeholder:text-on-surface-variant/25"
               placeholder="Acme Motors Ltd"/>
           </div>
           <div class="flex flex-col gap-2">
             <label for="region-country" class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Region / Country</label>
             <input id="region-country" name="regionCountry" type="text" autocomplete="country-name"
-              class="bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface p-4 rounded-[6px] placeholder:text-on-surface-variant/25"
+              class="bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface p-4 rounded-[6px] placeholder:text-on-surface-variant/25"
               placeholder="e.g. North America — United States"/>
           </div>
           <div class="flex flex-col gap-2">
             <label for="address" class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Address</label>
             <textarea id="address" name="address" rows="3" autocomplete="street-address"
-              class="bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface p-4 rounded-[6px] placeholder:text-on-surface-variant/25 resize-y min-h-[100px]"
+              class="bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface p-4 rounded-[6px] placeholder:text-on-surface-variant/25 resize-y min-h-[100px]"
               placeholder="Street, city, state / province, postal code"></textarea>
           </div>
         </div>
 
-        <div class="bg-[#151e12] border border-[#2e372a] rounded-[6px] p-6 md:p-8 flex flex-col gap-6">
+        <div class="bg-[#1A2A1A] border border-[rgba(0,198,0,0.28)] rounded-[6px] p-6 md:p-8 flex flex-col gap-6">
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <h2 class="text-lg text-[#00c600] font-normal tracking-tight">Instructors</h2>
             <button type="button" id="add-instructor"
-              class="inline-flex items-center justify-center gap-2 px-4 py-2 border border-[#2e372a] text-on-surface-variant text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:border-[#00c600]/50 hover:text-[#00c600] transition-colors self-start sm:self-auto">
+              class="inline-flex items-center justify-center gap-2 px-4 py-2 border border-[rgba(0,198,0,0.28)] text-on-surface-variant text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:border-[#00c600]/50 hover:text-[#00c600] transition-colors self-start sm:self-auto">
               <span class="material-symbols-outlined text-lg">person_add</span>
               Add instructor
             </button>
@@ -118,22 +116,22 @@
 
         <div id="form-status" class="hidden text-sm font-medium rounded-[6px] px-4 py-3 border" role="status"></div>
 
-        <div id="post-save-next" class="hidden flex flex-col sm:flex-row sm:items-center gap-4 p-5 rounded-[6px] border border-[#00c600]/40 bg-[#00c600]/10">
+        <div id="post-save-next" class="hidden flex flex-col sm:flex-row sm:items-center gap-4 p-5 rounded-[6px] border border-[rgba(0,198,0,0.28)] bg-[#1A2A1A]">
           <p class="text-sm text-on-surface font-light flex-1">
             Company saved. Continue to the shared dashboard to see your fleet and open a vehicle.
           </p>
-          <a href="company-dashboard.html" class="inline-flex items-center justify-center shrink-0 px-8 py-3 bg-[#00c600] text-black font-medium text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:bg-[#77ff61] transition-colors whitespace-nowrap">
+          <a href="company-dashboard.html" class="inline-flex items-center justify-center shrink-0 px-8 py-3 bg-transparent border border-[#00C600] text-white font-thin text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:bg-[rgba(0,198,0,0.15)] transition-colors whitespace-nowrap">
             Go to company dashboard
           </a>
         </div>
 
         <div class="flex flex-col sm:flex-row flex-wrap gap-4 pt-2">
           <button type="button" id="btn-save-continue"
-            class="px-10 py-4 bg-[#00c600] text-black font-medium text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:bg-[#77ff61] transition-all active:scale-[0.98] active-state-black sm:min-w-[220px]">
+            class="px-10 py-4 bg-transparent border border-[#00C600] text-white font-thin text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:bg-[rgba(0,198,0,0.15)] transition-all active:scale-[0.98] active-state-black sm:min-w-[220px]">
             Save &amp; Continue
           </button>
           <button type="button" id="btn-send-invites"
-            class="px-10 py-4 border border-[#00c600]/60 text-[#00c600] font-medium text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:bg-[#00c600]/10 transition-colors sm:min-w-[220px]">
+            class="px-10 py-4 border border-[#00C600] text-white font-thin text-[11px] uppercase tracking-[0.2em] rounded-[6px] bg-transparent hover:bg-[rgba(0,198,0,0.12)] transition-colors sm:min-w-[220px]">
             Send Email Invites
           </button>
         </div>
@@ -142,7 +140,7 @@
   </main>
 
   <template id="instructor-row-template">
-    <div class="instructor-row flex flex-col gap-4 p-4 rounded-[6px] border border-[#2e372a] bg-[#0d160a]/40">
+    <div class="instructor-row flex flex-col gap-4 p-4 rounded-[6px] border border-[rgba(0,198,0,0.28)] bg-[#0A0F0A]/40">
       <div class="flex justify-between items-start gap-2">
         <span class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/50 instructor-label">Instructor</span>
         <button type="button" class="remove-instructor text-on-surface-variant/50 hover:text-[#ffb4ab] p-1 rounded transition-colors" title="Remove row" aria-label="Remove instructor">
@@ -152,11 +150,11 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="flex flex-col gap-2">
           <label class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Full name</label>
-          <input type="text" class="instructor-name bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface p-3 rounded-[6px] placeholder:text-on-surface-variant/25" placeholder="Jane Instructor" autocomplete="name"/>
+          <input type="text" class="instructor-name bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface p-3 rounded-[6px] placeholder:text-on-surface-variant/25" placeholder="Jane Instructor" autocomplete="name"/>
         </div>
         <div class="flex flex-col gap-2">
           <label class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Email</label>
-          <input type="email" class="instructor-email bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface p-3 rounded-[6px] placeholder:text-on-surface-variant/25" placeholder="jane@example.com" autocomplete="email"/>
+          <input type="email" class="instructor-email bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface p-3 rounded-[6px] placeholder:text-on-surface-variant/25" placeholder="jane@example.com" autocomplete="email"/>
         </div>
       </div>
     </div>
@@ -238,7 +236,7 @@
         statusEl.classList.remove("hidden");
         if (ok) {
           statusEl.className =
-            "text-sm font-medium rounded-[6px] px-4 py-3 border border-[#00c600]/40 bg-[#00c600]/10 text-[#77ff61]";
+            "text-sm font-medium rounded-[6px] px-4 py-3 border border-[#00c600]/40 bg-[#00c600]/10 text-[#FFFFFF]";
         } else {
           statusEl.className =
             "text-sm font-medium rounded-[6px] px-4 py-3 border border-[#ffb4ab]/50 bg-[#93000a]/20 text-[#ffb4ab]";

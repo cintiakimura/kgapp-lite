@@ -5,34 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>KG App Lite — Vehicle Detail</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/kg-theme.css"/>
   <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
       theme: {
         extend: {
-          colors: { "on-surface": "#dbe6d3", "on-surface-variant": "#bbcbb2" },
+          colors: { "on-surface": "#FFFFFF", "on-surface-variant": "rgba(255,255,255,0.72)" },
           borderRadius: { DEFAULT: "6px" },
         },
       },
     };
   </script>
   <style>
-    body { background-color: #0d160a; color: #dbe6d3; font-family: "Space Grotesk", sans-serif; font-weight: 300; }
+    body { background-color: #0A0F0A; color: #FFFFFF; font-family: "Akurat", sans-serif; font-weight: 200; }
     .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24; }
     .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: #2e372a; border-radius: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0,198,0,0.22); border-radius: 6px; }
   </style>
 </head>
-<body class="bg-[#0d160a] min-h-screen flex flex-col">
-  <header class="flex flex-wrap justify-between items-center gap-4 w-full px-6 md:px-8 py-6 bg-[#0d160a] border-b border-[#2e372a] sticky top-0 z-40">
+<body class="bg-[#0A0F0A] min-h-screen flex flex-col">
+  <header class="flex flex-wrap justify-between items-center gap-4 w-full px-6 md:px-8 py-6 bg-[#0A0F0A] border-b border-[rgba(0,198,0,0.28)] sticky top-0 z-40">
     <div class="flex items-center gap-6 md:gap-12 min-w-0">
-      <a href="landing.html" class="flex items-center gap-2 shrink-0">
-        <div class="w-8 h-8 bg-[#00c600] flex items-center justify-center rounded-[6px]">
-          <span class="material-symbols-outlined text-black font-bold text-xl">terminal</span>
-        </div>
-        <span class="text-lg font-medium text-[#00c600] tracking-tighter uppercase hidden sm:inline">KGAPP <span class="font-light opacity-60 lowercase">lite</span></span>
+      <a href="landing.html" class="flex items-center gap-3 shrink-0 min-w-0">
+        <img src="assets/kg-logo.png" alt="KG" width="32" height="32" class="kg-brand-logo"/>
+        <span class="text-lg font-normal text-white tracking-tighter uppercase hidden sm:inline">KGAPP <span class="font-thin lowercase opacity-70">lite</span></span>
       </a>
       <nav class="hidden md:flex items-center gap-6 text-[11px] font-medium uppercase tracking-[0.2em]">
         <a class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="landing.html">Home</a>
@@ -40,8 +38,8 @@
       </nav>
     </div>
     <div class="flex items-center gap-2">
-      <a href="create-company.html" class="px-4 py-2 border border-[#00c600] text-[#00c600] text-[10px] font-medium uppercase tracking-[0.2em] rounded-[6px] bg-[#00c600]/10 hover:bg-[#00c600]/20 transition-colors whitespace-nowrap">Sign up</a>
-      <a href="company-dashboard.html" class="px-4 py-2 border border-[#00c600]/40 text-[#00c600] text-[10px] font-medium uppercase tracking-[0.2em] rounded-[6px] hover:bg-[#00c600] hover:text-black transition-colors whitespace-nowrap">Dashboard</a>
+      <a href="create-company.html" class="px-4 py-2 border border-[#00C600] text-white text-[10px] font-thin uppercase tracking-[0.2em] rounded-[6px] bg-transparent hover:bg-[rgba(0,198,0,0.12)] transition-colors whitespace-nowrap">Sign up</a>
+      <a href="company-dashboard.html" class="px-4 py-2 border border-[#00C600] text-white text-[10px] font-thin uppercase tracking-[0.2em] rounded-[6px] bg-transparent hover:bg-[rgba(0,198,0,0.12)] transition-colors whitespace-nowrap">Dashboard</a>
     </div>
   </header>
 
@@ -60,7 +58,7 @@
     </div>
 
     <!-- Vehicle information -->
-    <section class="bg-[#151e12] border border-[#2e372a] rounded-[6px] p-6 md:p-8 mb-8">
+    <section class="bg-[#1A2A1A] border border-[rgba(0,198,0,0.28)] rounded-[6px] p-6 md:p-8 mb-8">
       <h2 class="text-lg text-[#00c600] font-normal mb-6">Vehicle information</h2>
       <dl class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
@@ -85,40 +83,40 @@
     <!-- Wiring diagram -->
     <section class="mb-8">
       <h2 class="text-lg text-[#00c600] font-normal mb-4">Electrical wiring diagram</h2>
-      <div class="rounded-[6px] border border-[#2e372a] bg-[#0d160a] overflow-hidden">
+      <div class="rounded-[6px] border border-[rgba(0,198,0,0.28)] bg-[#0A0F0A] overflow-hidden">
         <div class="aspect-[16/10] w-full relative bg-[#081006]">
           <img id="wiring-img" src="" alt="Electrical wiring diagram" class="w-full h-full object-contain"/>
         </div>
-        <p class="px-4 py-3 text-xs text-on-surface-variant/70 border-t border-[#2e372a]">
+        <p class="px-4 py-3 text-xs text-on-surface-variant/70 border-t border-[rgba(0,198,0,0.28)]">
           Reference diagram for harness routing and connector IDs (prototype image).
         </p>
       </div>
     </section>
 
     <!-- Simulations / faults history -->
-    <section class="bg-[#151e12] border border-[#2e372a] rounded-[6px] overflow-hidden mb-10">
-      <div class="px-6 py-5 border-b border-[#2e372a]">
+    <section class="bg-[#1A2A1A] border border-[rgba(0,198,0,0.28)] rounded-[6px] overflow-hidden mb-10">
+      <div class="px-6 py-5 border-b border-[rgba(0,198,0,0.28)]">
         <h2 class="text-lg text-[#00c600] font-normal">Previous simulations &amp; faults</h2>
         <p class="text-sm text-on-surface-variant mt-1 font-light">Runs recorded for this VIN.</p>
       </div>
       <div class="overflow-x-auto custom-scrollbar">
         <table class="w-full text-left border-collapse min-w-[520px]">
           <thead>
-            <tr class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/50 border-b border-[#2e372a]">
+            <tr class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/50 border-b border-[rgba(0,198,0,0.28)]">
               <th class="p-4 font-medium">Date</th>
               <th class="p-4 font-medium">Fault / scenario</th>
               <th class="p-4 font-medium">KG box</th>
               <th class="p-4 font-medium">Status</th>
             </tr>
           </thead>
-          <tbody id="sim-body" class="text-sm divide-y divide-[#2e372a]/50"></tbody>
+          <tbody id="sim-body" class="text-sm divide-y divide-[rgba(0,198,0,0.18)]/50"></tbody>
         </table>
       </div>
       <p id="sim-empty" class="hidden p-8 text-center text-on-surface-variant text-sm">No simulations yet for this vehicle.</p>
     </section>
 
     <div class="flex flex-col sm:flex-row gap-4">
-      <button type="button" id="btn-start-simulation" class="inline-flex items-center justify-center gap-2 px-10 py-4 bg-[#00c600] text-black font-medium text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:bg-[#77ff61] transition-all">
+      <button type="button" id="btn-start-simulation" class="inline-flex items-center justify-center gap-2 px-10 py-4 bg-transparent border border-[#00C600] text-white font-thin text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:bg-[rgba(0,198,0,0.15)] transition-all">
         <span class="material-symbols-outlined text-xl">science</span>
         Create New Simulation
       </button>
@@ -127,18 +125,18 @@
 
   <!-- KG Box selection modal (when multiple boxes) -->
   <div id="kg-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="kg-modal-title">
-    <div class="bg-[#151e12] border border-[#2e372a] rounded-[6px] max-w-md w-full p-6 md:p-8 shadow-xl">
-      <h3 id="kg-modal-title" class="text-xl text-[#00c600] font-normal mb-2">Select KG box</h3>
+    <div class="bg-[#1A2A1A] border border-[rgba(0,198,0,0.28)] rounded-[6px] max-w-md w-full p-6 md:p-8 shadow-xl">
+      <h3 id="kg-modal-title" class="text-xl text-white font-normal mb-2">Select KG box</h3>
       <p class="text-sm text-on-surface-variant font-light mb-6">
         Your company has multiple hardware nodes. Choose which KG box this simulation should run on.
       </p>
       <label class="block text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60 mb-2">KG box</label>
-      <select id="kg-box-select" class="w-full bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface p-4 rounded-[6px] mb-6 cursor-pointer"></select>
+      <select id="kg-box-select" class="w-full bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface p-4 rounded-[6px] mb-6 cursor-pointer"></select>
       <div class="flex flex-col-reverse sm:flex-row gap-3 sm:justify-end">
-        <button type="button" id="kg-modal-cancel" class="px-6 py-3 border border-[#2e372a] text-on-surface-variant text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:border-on-surface-variant/50 transition-colors">
+        <button type="button" id="kg-modal-cancel" class="px-6 py-3 border border-[rgba(0,198,0,0.28)] text-on-surface-variant text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:border-on-surface-variant/50 transition-colors">
           Cancel
         </button>
-        <button type="button" id="kg-modal-confirm" class="px-8 py-3 bg-[#00c600] text-black font-medium text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:bg-[#77ff61] transition-colors">
+        <button type="button" id="kg-modal-confirm" class="px-8 py-3 bg-transparent border border-[#00C600] text-white font-thin text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:bg-[rgba(0,198,0,0.15)] transition-colors">
           Continue
         </button>
       </div>
@@ -154,7 +152,7 @@
           year: 2023,
           vin: "4T1B11HK5KU123456",
           diagram:
-            "https://placehold.co/1200x750/0d160a/00c600?text=Electrical+Wiring+Diagram+%E2%80%94+Camry+2023",
+            "https://placehold.co/1200x750/0A0F0A/00C600?text=Electrical+Wiring+Diagram+%E2%80%94+Camry+2023",
           simulations: [
             { date: "2026-04-28", fault: "LIN — driver door module intermittent", box: "KG-BX-9920", status: "Completed" },
             { date: "2026-04-10", fault: "CAN — ECM gateway timeout", box: "KG-BX-8812", status: "Completed" },
@@ -167,7 +165,7 @@
           year: 2022,
           vin: "1HGCV1F34NA004321",
           diagram:
-            "https://placehold.co/1200x750/151e12/77ff61?text=Wiring+Schematic+%E2%80%94+Accord",
+            "https://placehold.co/1200x750/1A2A1A/00C600?text=Wiring+Schematic+%E2%80%94+Accord",
           simulations: [
             { date: "2026-04-15", fault: "EPS torque sensor calibration drift", box: "KG-BX-9920", status: "Completed" },
           ],
@@ -178,7 +176,7 @@
           year: 2024,
           vin: "1FTFW1ED5NFA99887",
           diagram:
-            "https://placehold.co/1200x750/0d160a/bbcbb2?text=HV+Wiring+Overview",
+            "https://placehold.co/1200x750/0A0F0A/FFFFFF?text=HV+Wiring+Overview",
           simulations: [],
         },
         "4": {
@@ -187,7 +185,7 @@
           year: 2023,
           vin: "WBY31AW09PFN12345",
           diagram:
-            "https://placehold.co/1200x750/192216/00c600?text=High-Voltage+Diagram",
+            "https://placehold.co/1200x750/1A2A1A/00C600?text=High-Voltage+Diagram",
           simulations: [
             { date: "2026-05-01", fault: "Battery management — cell balancing", box: "KG-BX-1104", status: "In progress" },
             { date: "2026-04-20", fault: "Charging — PLC communication", box: "KG-BX-9920", status: "Completed" },
@@ -228,7 +226,7 @@
       } else {
         v.simulations.forEach(function (s) {
           var tr = document.createElement("tr");
-          tr.className = "hover:bg-[#0d160a]/50";
+          tr.className = "hover:bg-[#0A0F0A]/50";
           tr.innerHTML =
             "<td class=\"p-4 text-on-surface-variant\">" +
             escapeHtml(s.date) +
@@ -239,7 +237,7 @@
             "<td class=\"p-4 font-mono text-xs\">" +
             escapeHtml(s.box) +
             "</td>" +
-            "<td class=\"p-4\"><span class=\"text-[10px] uppercase tracking-wider px-2 py-1 rounded border border-[#2e372a] \">" +
+            "<td class=\"p-4\"><span class=\"text-[10px] uppercase tracking-wider px-2 py-1 rounded border border-[rgba(0,198,0,0.28)] \">" +
             escapeHtml(s.status) +
             "</span></td>";
           tbody.appendChild(tr);

@@ -1,6 +1,6 @@
 {
+  "/api/vehicles/route": "/api/vehicles",
   "/_not-found/page": "/_not-found",
-  "/api/invitations/send/route": "/api/invitations/send",
   "/page": "/",
-  "/api/vehicles/route": "/api/vehicles"
+  "/api/invitations/send/route": "/api/invitations/send"
 }

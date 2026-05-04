@@ -1,0 +1,65 @@
+/**
+ * KG App Lite — global design tokens (Akurat, palette, typography).
+ * Load after Tailwind so these defaults apply where utilities omit weight/color.
+ */
+
+:root {
+  --kg-bg: #0a0f0a;
+  --kg-card: #1a2a1a;
+  --kg-accent: #00c600;
+  --kg-text: #ffffff;
+  --kg-border: rgba(0, 198, 0, 0.28);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  font-family: "Akurat", "LL Akkurat", "Akkurat", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, sans-serif;
+  font-weight: 200;
+  color: var(--kg-text);
+  background-color: var(--kg-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+}
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1em;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+.kg-brand-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Inputs on card surfaces */
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  font-weight: 200;
+}

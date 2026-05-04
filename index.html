@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>KGAPP lite — Home</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/kg-theme.css"/>
   <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "on-surface": "#dbe6d3",
-            "on-surface-variant": "#bbcbb2",
-            background: "#0d160a",
+            "on-surface": "#FFFFFF",
+            "on-surface-variant": "rgba(255,255,255,0.72)",
+            background: "#0A0F0A",
             primary: "#00c600",
           },
         },
@@ -25,26 +25,27 @@
   <style>
     body {
       min-height: 100dvh;
-      background-color: #0d160a;
+      background-color: #0A0F0A;
     }
     .material-symbols-outlined {
       font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
     }
   </style>
 </head>
-<body class="bg-background text-on-surface font-light antialiased flex flex-col min-h-[100dvh]">
+<body class="bg-background text-on-surface font-thin antialiased flex flex-col min-h-[100dvh]">
   <header class="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center w-full px-6 sm:px-10 lg:px-12 py-6 sm:py-8 shrink-0">
-    <a href="index.html" class="flex items-center shrink-0" aria-label="KGAPP lite home">
-      <img alt="KGAPP lite" class="h-8 sm:h-10 w-auto opacity-95" src="https://lh3.googleusercontent.com/aida/ADBb0ugwIf8ENye8WUJNVJIILTXR1_Qr9ZhJBn1-BQc0z19ch7OhB5SVz1Vmf5tZGih0OZdDH-eaar_eeC7oJ9rGAipwO1bR0Bo-PrQtTOXPMOfY5skVvDnZRXTkU_-BDdxbxxC3E1D5xPXvZLlzfDEihKbh1pUDaHB4SiY4YFJ6Sp1B9tLVhQBPdYaXliAObWKpwwAGx_MaSuLhpknM1GVi0p0KXEIJNVrCdAMbOtuYK6f7jiMsxP-d7dpR61nFtn54vlfC9vmhbapbTQ"/>
+    <a href="index.html" class="flex items-center gap-3 shrink-0 min-w-0" aria-label="KGAPP lite home">
+      <img src="assets/kg-logo.png" alt="KG" width="32" height="32" class="kg-brand-logo"/>
+      <span class="text-xl sm:text-2xl font-normal text-white tracking-tighter uppercase">KGAPP <span class="font-thin lowercase opacity-70">lite</span></span>
     </a>
     <div class="flex flex-col sm:flex-row sm:items-center gap-3 w-full sm:w-auto sm:justify-end">
       <input type="email" id="login-email" autocomplete="email" placeholder="Work email"
-        class="w-full sm:w-56 sm:min-w-[14rem] bg-[#151e12] border border-[#2e372a] rounded-md px-3 py-2 text-sm text-on-surface placeholder:text-on-surface-variant/40 focus:border-primary focus:ring-0 focus:outline-none"/>
+        class="w-full sm:w-56 sm:min-w-[14rem] bg-[#1A2A1A] border border-[rgba(0,198,0,0.28)] rounded-[6px] px-3 py-2 text-sm text-on-surface font-thin placeholder:text-on-surface-variant/40 focus:border-primary focus:ring-0 focus:outline-none"/>
       <nav class="flex items-center gap-3 shrink-0">
-        <button type="button" id="btn-login" class="inline-flex items-center justify-center border border-primary/60 text-primary px-4 sm:px-6 py-2 rounded-md text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-primary/10 transition-colors">
+        <button type="button" id="btn-login" class="inline-flex items-center justify-center border border-[#00C600] text-white bg-transparent px-4 sm:px-6 py-2 rounded-[6px] text-xs sm:text-sm font-thin tracking-wide uppercase hover:bg-[rgba(0,198,0,0.12)] transition-colors">
           Login
         </button>
-        <a href="create-company.html" class="inline-flex items-center justify-center bg-primary text-[#0d160a] px-4 sm:px-6 py-2 rounded-md text-xs sm:text-sm font-medium tracking-wide uppercase hover:opacity-90 transition-opacity">
+        <a href="create-company.html" class="inline-flex items-center justify-center border border-[#00C600] text-white bg-transparent px-4 sm:px-6 py-2 rounded-[6px] text-xs sm:text-sm font-thin tracking-wide uppercase hover:bg-[rgba(0,198,0,0.12)] transition-colors">
           Sign Up
         </a>
       </nav>
@@ -53,7 +54,7 @@
 
   <main class="flex-1 flex flex-col justify-center px-6 sm:px-10 lg:px-12 w-full max-w-5xl mx-auto pb-16">
     <div class="space-y-5 sm:space-y-6">
-      <h1 class="text-5xl sm:text-7xl lg:text-8xl xl:text-[7rem] leading-[0.95] font-extralight tracking-tighter text-on-surface">
+      <h1 class="text-5xl sm:text-7xl lg:text-8xl xl:text-[7rem] leading-[0.95] font-normal tracking-tighter text-on-surface">
         KGAPP lite
       </h1>
       <div class="w-16 sm:w-24 h-px bg-primary"></div>

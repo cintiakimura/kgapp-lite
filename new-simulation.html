@@ -5,22 +5,22 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>KG App Pro - New Simulation</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/kg-theme.css"/>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     "colors": {
-                        "primary": "#3ee42f",
-                        "on-surface": "#dbe6d3",
-                        "on-surface-variant": "#bbcbb2",
-                        "surface": "#051005",
-                        "surface-container": "#0d1a0d",
-                        "surface-container-high": "#152415",
-                        "outline": "#3d4b37",
-                        "background": "#051005",
+                        "primary": "#00c600",
+                        "on-surface": "#FFFFFF",
+                        "on-surface-variant": "rgba(255,255,255,0.72)",
+                        "surface": "#0A0F0A",
+                        "surface-container": "#1A2A1A",
+                        "surface-container-high": "#1A2A1A",
+                        "outline": "rgba(0,198,0,0.28)",
+                        "background": "#0A0F0A",
                         "error": "#ffb4ab",
                         "warning": "#ffff00"
                     },
@@ -39,18 +39,18 @@
                         "stack-lg": "48px"
                     },
                     "fontFamily": {
-                        "h1": ["Space Grotesk"],
-                        "h2": ["Space Grotesk"],
-                        "caption": ["Space Grotesk"],
-                        "body-md": ["Space Grotesk"],
-                        "body-lg": ["Space Grotesk"]
+                        "h1": ["Akurat"],
+                        "h2": ["Akurat"],
+                        "caption": ["Akurat"],
+                        "body-md": ["Akurat"],
+                        "body-lg": ["Akurat"]
                     },
                     "fontSize": {
                         "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400"}],
                         "h2": ["24px", {"lineHeight": "1.3", "fontWeight": "400"}],
-                        "caption": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "300"}],
-                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "300"}],
-                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "300"}]
+                        "caption": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "200"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "200"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "200"}]
                     }
                 },
             },
@@ -61,15 +61,15 @@
             font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
         }
         body {
-            background-color: #051005;
-            color: #dbe6d3;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 300;
+            background-color: #0A0F0A;
+            color: #FFFFFF;
+            font-family: 'Akurat', sans-serif;
+            font-weight: 200;
         }
         .action-button.active {
             background-color: #000000 !important;
-            color: #3ee42f !important;
-            border-color: #3ee42f !important;
+            color: #00c600 !important;
+            border-color: #00c600 !important;
         }
         .terminal-scroll::-webkit-scrollbar {
             width: 4px;
@@ -78,7 +78,7 @@
             background: rgba(0,0,0,0.2);
         }
         .terminal-scroll::-webkit-scrollbar-thumb {
-            background: #3ee42f;
+            background: rgba(0, 198, 0, 0.35);
         }
         #wiring-modal-img {
             transform-origin: center center;
@@ -91,16 +91,19 @@
 <header class="bg-surface border-b border-outline/30 flex justify-between items-center w-full px-container-padding py-4 sticky top-0 z-50">
 <div class="flex items-center gap-8">
 <div class="flex items-center gap-3">
-<a href="landing.html" class="block" aria-label="KGAPP home"><img alt="KGAPP lite" class="h-8 w-auto" src="https://lh3.googleusercontent.com/aida/ADBb0ugwIf8ENye8WUJNVJIILTXR1_Qr9ZhJBn1-BQc0z19ch7OhB5SVz1Vmf5tZGih0OZdDH-eaar_eeC7oJ9rGAipwO1bR0Bo-PrQtTOXPMOfY5skVvDnZRXTkU_-BDdxbxxC3E1D5xPXvZLlzfDEihKbh1pUDaHB4SiY4YFJ6Sp1B9tLVhQBPdYaXliAObWKpwwAGx_MaSuLhpknM1GVi0p0KXEIJNVrCdAMbOtuYK6f7jiMsxP-d7dpR61nFtn54vlfC9vmhbapbTQ"/></a>
+<a href="landing.html" class="flex items-center gap-3 shrink-0 min-w-0" aria-label="KGAPP home">
+<img src="assets/kg-logo.png" alt="KG" width="32" height="32" class="kg-brand-logo"/>
+<span class="text-lg font-normal text-white tracking-tighter uppercase hidden sm:inline">KGAPP <span class="font-thin lowercase opacity-70">lite</span></span>
+</a>
 </div>
 <nav class="hidden lg:flex items-center gap-6">
-<a class="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors" href="landing.html">Home</a>
-<a class="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors" href="company-dashboard.html">Company dashboard</a>
+<a class="text-xs font-thin uppercase tracking-widest text-white hover:text-primary transition-colors" href="landing.html">Home</a>
+<a class="text-xs font-thin uppercase tracking-widest text-white hover:text-primary transition-colors" href="company-dashboard.html">Company dashboard</a>
 </nav>
 </div>
 <div class="flex items-center gap-3">
-<a href="create-company.html" class="text-xs font-bold uppercase tracking-widest border border-primary text-primary px-5 py-2 rounded hover:bg-primary/10 transition-colors whitespace-nowrap">Sign up</a>
-<a href="company-dashboard.html" class="text-xs font-bold uppercase tracking-widest border border-primary text-primary px-6 py-2 rounded hover:bg-primary/10 transition-colors whitespace-nowrap">Dashboard</a>
+<a href="create-company.html" class="text-xs font-thin uppercase tracking-widest border border-[#00C600] text-white bg-transparent px-5 py-2 rounded-[6px] hover:bg-[rgba(0,198,0,0.12)] transition-colors whitespace-nowrap">Sign up</a>
+<a href="company-dashboard.html" class="text-xs font-thin uppercase tracking-widest border border-[#00C600] text-white bg-transparent px-6 py-2 rounded-[6px] hover:bg-[rgba(0,198,0,0.12)] transition-colors whitespace-nowrap">Dashboard</a>
 </div>
 </header>
 <main class="flex-1 max-w-[1440px] w-full mx-auto p-container-padding">
