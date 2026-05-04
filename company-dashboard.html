@@ -23,6 +23,8 @@
     .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24; }
     .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
     .custom-scrollbar::-webkit-scrollbar-thumb { background: #2e372a; border-radius: 6px; }
+    .instructor-menu-dropdown:not(.is-open) { display: none; }
+    .instructor-menu-dropdown.is-open { display: block; }
   </style>
 </head>
 <body class="bg-[#0d160a] min-h-screen flex flex-col">
@@ -36,23 +38,25 @@
       </a>
       <nav class="hidden sm:flex items-center flex-wrap gap-x-6 gap-y-2 text-[10px] md:text-[11px] font-medium uppercase tracking-[0.2em]">
         <a class="text-[#00c600] border-b border-[#00c600] pb-0.5" href="company-dashboard.html">Dashboard</a>
-        <a class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="admin-dashboard.html">Admin</a>
+        <a id="nav-admin-link" class="hidden text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="admin-dashboard.html">Admin</a>
         <a class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="create-company.html">Create company</a>
       </nav>
     </div>
     <div class="flex items-center gap-2 md:gap-4">
-      <a href="landing.html" class="text-[10px] md:text-[11px] text-on-surface-variant/80 hover:text-[#00c600] uppercase tracking-[0.2em] whitespace-nowrap">Sign out</a>
+      <a href="landing.html" id="sign-out" class="text-[10px] md:text-[11px] text-on-surface-variant/80 hover:text-[#00c600] uppercase tracking-[0.2em] whitespace-nowrap">Sign out</a>
       <a href="create-company.html" class="px-3 md:px-5 py-2 border border-[#00c600] text-[#00c600] text-[10px] md:text-[11px] font-medium uppercase tracking-[0.2em] rounded-[6px] bg-[#00c600]/10 hover:bg-[#00c600]/20 transition-colors whitespace-nowrap">Sign up</a>
-      <button type="button" class="px-3 md:px-6 py-2 border border-[#00c600]/40 text-[#00c600] text-[10px] md:text-[11px] font-medium uppercase tracking-[0.2em] rounded-[6px] hover:bg-[#00c600] hover:text-black transition-colors whitespace-nowrap">Login</button>
+      <a href="landing.html" class="px-3 md:px-6 py-2 border border-[#00c600]/40 text-[#00c600] text-[10px] md:text-[11px] font-medium uppercase tracking-[0.2em] rounded-[6px] hover:bg-[#00c600] hover:text-black transition-colors whitespace-nowrap">Home</a>
     </div>
   </header>
 
   <main class="flex-1 flex flex-col px-6 md:px-10 lg:px-12 py-10 max-w-6xl mx-auto w-full">
     <section class="flex flex-col gap-4 mb-8">
       <div class="flex flex-wrap items-center gap-2 text-[10px] font-medium tracking-[0.25em] uppercase text-on-surface-variant/60">
-        <span class="text-on-surface-variant/50">Company</span>
+        <a class="text-on-surface-variant/50 hover:text-[#00c600] transition-colors" href="landing.html">Home</a>
         <span class="text-on-surface-variant/30">/</span>
-        <span class="text-[#00c600]">Dashboard</span>
+        <span class="text-on-surface-variant/50">Login</span>
+        <span class="text-on-surface-variant/30">/</span>
+        <span class="text-[#00c600]">Company dashboard</span>
       </div>
       <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
         <div>
@@ -65,10 +69,10 @@
     </section>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-      <a href="my-vehicles.html" class="flex items-center justify-between gap-3 rounded-[6px] border border-[#2e372a] bg-[#151e12] px-5 py-4 text-sm text-on-surface hover:border-[#00c600]/40 transition-colors group">
+      <a href="#fleet" class="flex items-center justify-between gap-3 rounded-[6px] border border-[#2e372a] bg-[#151e12] px-5 py-4 text-sm text-on-surface hover:border-[#00c600]/40 transition-colors group">
         <span class="flex items-center gap-3">
           <span class="material-symbols-outlined text-[#00c600]">directions_car</span>
-          <span class="font-light">My vehicles</span>
+          <span class="font-light">Fleet list</span>
         </span>
         <span class="material-symbols-outlined text-on-surface-variant group-hover:text-[#00c600]">chevron_right</span>
       </a>
@@ -81,7 +85,34 @@
       </a>
     </div>
 
-    <div class="bg-[#151e12] border border-[#2e372a] rounded-[6px] overflow-hidden">
+    <div id="instructors-section" class="mb-8 bg-[#151e12] border border-[#2e372a] rounded-[6px] overflow-hidden">
+      <div class="px-6 py-5 border-b border-[#2e372a] flex flex-wrap items-center justify-between gap-4">
+        <h2 class="text-lg text-[#00c600] font-normal shrink-0">Instructors</h2>
+        <div class="flex flex-wrap items-center gap-3 md:gap-4">
+          <label class="flex items-center gap-2 text-[10px] uppercase tracking-[0.15em] text-on-surface-variant/80">
+            <span class="whitespace-nowrap">Invitation language</span>
+            <select id="invite-locale" class="rounded-[6px] border border-[#2e372a] bg-[#0d160a] text-on-surface text-xs px-2 py-1.5 font-normal normal-case tracking-normal min-w-[8rem]">
+              <option value="en">English</option>
+              <option value="es">Español</option>
+              <option value="pt">Português</option>
+              <option value="ja">日本語</option>
+            </select>
+          </label>
+          <button type="button" id="btn-invite-all" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#00c600] text-black text-[10px] font-medium uppercase tracking-[0.2em] rounded-[6px] hover:bg-[#77ff61] transition-colors shrink-0 disabled:opacity-45 disabled:pointer-events-none">
+            <span class="material-symbols-outlined text-lg">mail</span>
+            Send Invites to All
+          </button>
+        </div>
+      </div>
+      <div id="invite-feedback" class="hidden px-6 py-3 text-sm border-b border-[#2e372a]" role="status" aria-live="polite"></div>
+      <div id="instructors-list" class="divide-y divide-[#2e372a]/60"></div>
+      <div id="instructors-empty" class="hidden p-8 text-center">
+        <p class="text-sm text-on-surface-variant font-light mb-4">No instructors on file yet.</p>
+        <a href="create-company.html" class="text-[11px] font-medium uppercase tracking-[0.2em] text-[#00c600] border border-[#00c600]/50 px-4 py-2 rounded-[6px] hover:bg-[#00c600]/10 transition-colors inline-block">Add instructors — Create company</a>
+      </div>
+    </div>
+
+    <div id="fleet" class="bg-[#151e12] border border-[#2e372a] rounded-[6px] overflow-hidden scroll-mt-24">
       <div class="px-6 py-5 border-b border-[#2e372a] flex flex-wrap items-center justify-between gap-4">
         <h2 class="text-lg text-[#00c600] font-normal">Fleet</h2>
         <span id="vehicle-count" class="text-[11px] uppercase tracking-[0.2em] text-on-surface-variant/60"></span>
@@ -107,8 +138,278 @@
     </p>
   </main>
 
+  <script src="js/role.js"></script>
   <script>
     (function () {
+      if (window.KGAPP && window.KGAPP.readIsSuperAdmin()) {
+        var adminLink = document.getElementById("nav-admin-link");
+        if (adminLink) adminLink.classList.remove("hidden");
+      }
+      var signOut = document.getElementById("sign-out");
+      if (signOut) {
+        signOut.addEventListener("click", function () {
+          try {
+            sessionStorage.removeItem("kgapp_is_super_admin");
+            sessionStorage.removeItem("kgapp_user_email");
+          } catch (e) {}
+        });
+      }
+
+      var STORAGE_KEY = "kgapp_company_draft_v1";
+      var listEl = document.getElementById("instructors-list");
+      var emptyEl = document.getElementById("instructors-empty");
+      var openMenu = null;
+
+      function getInviteLocale() {
+        var sel = document.getElementById("invite-locale");
+        return sel && sel.value ? sel.value : "en";
+      }
+
+      function getDashboardUrlForEmail() {
+        return window.location.origin + "/company-dashboard.html";
+      }
+
+      function showInviteFeedback(message, kind) {
+        var el = document.getElementById("invite-feedback");
+        if (!el) return;
+        el.textContent = message;
+        el.classList.remove("hidden");
+        el.classList.remove(
+          "border-l-4",
+          "border-l-[#ffb4ab]",
+          "border-l-[#00c600]/60",
+          "border-l-[#00c600]",
+          "bg-[#93000a]/15",
+          "bg-[#0d160a]",
+          "bg-[#00c600]/10",
+          "text-[#ffb4ab]",
+          "text-on-surface-variant",
+          "text-[#77ff61]"
+        );
+        if (kind === "error") {
+          el.classList.add("border-l-4", "border-l-[#ffb4ab]", "bg-[#93000a]/15", "text-[#ffb4ab]");
+        } else if (kind === "pending") {
+          el.classList.add("border-l-4", "border-l-[#00c600]/60", "bg-[#0d160a]", "text-on-surface-variant");
+        } else {
+          el.classList.add("border-l-4", "border-l-[#00c600]", "bg-[#00c600]/10", "text-[#77ff61]");
+        }
+      }
+
+      function setInviteButtonsDisabled(disabled) {
+        var btn = document.getElementById("btn-invite-all");
+        if (btn) btn.disabled = !!disabled;
+        document.querySelectorAll(".menu-invite").forEach(function (b) {
+          b.disabled = !!disabled;
+        });
+      }
+
+      async function sendInvitesToServer(rows) {
+        if (window.location.protocol === "file:") {
+          window.alert(
+            "Serve the app with npm run dev and open this page from http://localhost:3000 so invitations can be sent."
+          );
+          return;
+        }
+        var d = getDraft();
+        var companyName = (d && d.company && d.company.companyName) || "Your company";
+        var locale = getInviteLocale();
+        var dashboardUrl = getDashboardUrlForEmail();
+        var body = {
+          companyName: companyName,
+          locale: locale,
+          dashboardUrl: dashboardUrl,
+          instructors: rows.map(function (r) {
+            return {
+              fullName: r.fullName || "",
+              email: String(r.email || "").trim(),
+              locale: r.locale || undefined,
+            };
+          }),
+        };
+        setInviteButtonsDisabled(true);
+        showInviteFeedback("Sending…", "pending");
+        try {
+          var res = await fetch("/api/invitations/send", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          });
+          var data = await res.json().catch(function () {
+            return {};
+          });
+          if (!res.ok) {
+            throw new Error(data.error || res.statusText || "Request failed");
+          }
+          var failed = data.failed || 0;
+          var sent = data.sent || 0;
+          if (failed) {
+            showInviteFeedback(
+              "Sent " +
+                sent +
+                " of " +
+                (sent + failed) +
+                ". Some failed—check EMAIL_FROM and RESEND_API_KEY or SMTP in .env.",
+              "error"
+            );
+          } else {
+            showInviteFeedback("Successfully sent " + sent + " invitation email(s).", "ok");
+            d = getDraft() || {};
+            if (!d.company) d.company = { companyName: "", regionCountry: "", address: "" };
+            d.instructors = d.instructors || [];
+            d.invitesSent = true;
+            d.savedAt = new Date().toISOString();
+            try {
+              sessionStorage.setItem(STORAGE_KEY, JSON.stringify(d));
+            } catch (e3) {}
+          }
+        } catch (err) {
+          showInviteFeedback((err && err.message) || "Could not send invitations.", "error");
+        } finally {
+          setInviteButtonsDisabled(false);
+        }
+      }
+
+      function getDraft() {
+        try {
+          var raw = sessionStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function saveInstructors(instructors) {
+        var d = getDraft() || {};
+        if (!d.company) d.company = { companyName: "", regionCountry: "", address: "" };
+        d.instructors = instructors;
+        d.savedAt = new Date().toISOString();
+        if (d.invitesSent === undefined) d.invitesSent = false;
+        try {
+          sessionStorage.setItem(STORAGE_KEY, JSON.stringify(d));
+        } catch (e2) {}
+      }
+
+      function closeAllMenus() {
+        document.querySelectorAll(".instructor-menu-dropdown.is-open").forEach(function (el) {
+          el.classList.remove("is-open");
+        });
+        openMenu = null;
+      }
+
+      document.addEventListener("click", function (e) {
+        if (!e.target.closest("[data-instructor-menu-root]")) closeAllMenus();
+      });
+
+      function renderInstructors() {
+        var d = getDraft();
+        var instructors = (d && d.instructors) || [];
+        listEl.innerHTML = "";
+        var hasAny = instructors.some(function (i) {
+          return (i.fullName && String(i.fullName).trim()) || (i.email && String(i.email).trim());
+        });
+        if (!hasAny) {
+          emptyEl.classList.remove("hidden");
+          listEl.classList.add("hidden");
+          return;
+        }
+        emptyEl.classList.add("hidden");
+        listEl.classList.remove("hidden");
+
+        instructors.forEach(function (inst, realIndex) {
+          if (!(String(inst.fullName || "").trim() || String(inst.email || "").trim())) return;
+
+          var row = document.createElement("div");
+          row.className = "flex items-center justify-between gap-4 px-6 py-4 hover:bg-[#0d160a]/40 transition-colors";
+          row.innerHTML =
+            '<div class="min-w-0 flex-1">' +
+            '<p class="text-sm text-on-surface font-light truncate">' +
+            escapeHtml(String(inst.fullName || "").trim() || "—") +
+            "</p>" +
+            '<p class="text-xs text-on-surface-variant font-mono truncate mt-0.5">' +
+            escapeHtml(String(inst.email || "").trim() || "No email") +
+            "</p></div>" +
+            '<div class="relative shrink-0" data-instructor-menu-root>' +
+            '<button type="button" class="instructor-menu-btn flex h-9 w-9 items-center justify-center rounded-[6px] border border-[#2e372a] text-on-surface-variant hover:border-[#00c600]/50 hover:text-[#00c600] transition-colors" aria-haspopup="true" aria-expanded="false" title="More actions"><span class="material-symbols-outlined text-xl leading-none">more_vert</span></button>' +
+            '<div class="instructor-menu-dropdown absolute right-0 top-full mt-1 w-44 rounded-[6px] border border-[#2e372a] bg-[#0d160a] py-1 shadow-xl z-30">' +
+            '<button type="button" class="menu-edit block w-full px-4 py-2.5 text-left text-xs text-on-surface hover:bg-[#2e372a]/50 transition-colors">Edit</button>' +
+            '<button type="button" class="menu-invite block w-full px-4 py-2.5 text-left text-xs text-on-surface hover:bg-[#2e372a]/50 transition-colors">Send Invite</button>' +
+            '<button type="button" class="menu-delete block w-full px-4 py-2.5 text-left text-xs text-[#ffb4ab] hover:bg-[#93000a]/20 transition-colors">Delete</button>' +
+            "</div></div>";
+
+          var btn = row.querySelector(".instructor-menu-btn");
+          var drop = row.querySelector(".instructor-menu-dropdown");
+
+          btn.addEventListener("click", function (ev) {
+            ev.stopPropagation();
+            var wasOpen = drop.classList.contains("is-open");
+            closeAllMenus();
+            if (!wasOpen) {
+              drop.classList.add("is-open");
+              btn.setAttribute("aria-expanded", "true");
+              openMenu = drop;
+            } else {
+              btn.setAttribute("aria-expanded", "false");
+            }
+          });
+
+          row.querySelector(".menu-edit").addEventListener("click", function (ev) {
+            ev.stopPropagation();
+            closeAllMenus();
+            var draft = getDraft();
+            var arr = (draft && draft.instructors) || [];
+            var cur = arr[realIndex];
+            if (!cur) return;
+            var name = window.prompt("Full name", cur.fullName || "");
+            if (name === null) return;
+            var email = window.prompt("Email", cur.email || "");
+            if (email === null) return;
+            cur.fullName = name.trim();
+            cur.email = email.trim();
+            saveInstructors(arr);
+            renderInstructors();
+          });
+
+          row.querySelector(".menu-delete").addEventListener("click", function (ev) {
+            ev.stopPropagation();
+            closeAllMenus();
+            if (!window.confirm("Remove this instructor from the list?")) return;
+            var draft = getDraft();
+            var arr = (draft && draft.instructors) || [];
+            arr.splice(realIndex, 1);
+            saveInstructors(arr);
+            renderInstructors();
+          });
+
+          row.querySelector(".menu-invite").addEventListener("click", function (ev) {
+            ev.stopPropagation();
+            closeAllMenus();
+            var em = String(inst.email || "").trim();
+            if (!em) {
+              window.alert("Add an email for this instructor before sending an invite.");
+              return;
+            }
+            sendInvitesToServer([{ fullName: inst.fullName, email: inst.email, locale: inst.locale }]);
+          });
+
+          listEl.appendChild(row);
+        });
+      }
+
+      document.getElementById("btn-invite-all").addEventListener("click", function () {
+        var d = getDraft();
+        var instructors = (d && d.instructors) || [];
+        var rows = instructors.filter(function (i) {
+          return String(i.email || "").trim();
+        });
+        if (!rows.length) {
+          window.alert("No instructor emails on file. Add emails in Create company or use Edit on each row.");
+          return;
+        }
+        sendInvitesToServer(rows);
+      });
+
+      renderInstructors();
+
       var fleet = [
         { id: "1", brand: "Toyota", model: "Camry XSE", year: 2023, vin: "4T1B11HK5KU123456" },
         { id: "2", brand: "Honda", model: "Accord Sport", year: 2022, vin: "1HGCV1F34NA004321" },

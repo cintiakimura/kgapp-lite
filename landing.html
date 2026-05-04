@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KGAPP lite — Performance Engineering</title>
+  <title>KGAPP lite — Home</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -33,18 +33,22 @@
   </style>
 </head>
 <body class="bg-background text-on-surface font-light antialiased flex flex-col min-h-[100dvh]">
-  <header class="flex justify-between items-center w-full px-6 sm:px-10 lg:px-12 py-6 sm:py-8 shrink-0">
+  <header class="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center w-full px-6 sm:px-10 lg:px-12 py-6 sm:py-8 shrink-0">
     <a href="landing.html" class="flex items-center shrink-0" aria-label="KGAPP lite home">
       <img alt="KGAPP lite" class="h-8 sm:h-10 w-auto opacity-95" src="https://lh3.googleusercontent.com/aida/ADBb0ugwIf8ENye8WUJNVJIILTXR1_Qr9ZhJBn1-BQc0z19ch7OhB5SVz1Vmf5tZGih0OZdDH-eaar_eeC7oJ9rGAipwO1bR0Bo-PrQtTOXPMOfY5skVvDnZRXTkU_-BDdxbxxC3E1D5xPXvZLlzfDEihKbh1pUDaHB4SiY4YFJ6Sp1B9tLVhQBPdYaXliAObWKpwwAGx_MaSuLhpknM1GVi0p0KXEIJNVrCdAMbOtuYK6f7jiMsxP-d7dpR61nFtn54vlfC9vmhbapbTQ"/>
     </a>
-    <nav class="flex items-center gap-3 sm:gap-4">
-      <a href="company-dashboard.html" class="inline-flex items-center justify-center border border-primary/60 text-primary px-4 sm:px-6 py-2 rounded-md text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-primary/10 transition-colors">
-        Login
-      </a>
-      <a href="create-company.html" class="inline-flex items-center justify-center bg-primary text-[#0d160a] px-4 sm:px-6 py-2 rounded-md text-xs sm:text-sm font-medium tracking-wide uppercase hover:opacity-90 transition-opacity">
-        Sign Up
-      </a>
-    </nav>
+    <div class="flex flex-col sm:flex-row sm:items-center gap-3 w-full sm:w-auto sm:justify-end">
+      <input type="email" id="login-email" autocomplete="email" placeholder="Work email"
+        class="w-full sm:w-56 sm:min-w-[14rem] bg-[#151e12] border border-[#2e372a] rounded-md px-3 py-2 text-sm text-on-surface placeholder:text-on-surface-variant/40 focus:border-primary focus:ring-0 focus:outline-none"/>
+      <nav class="flex items-center gap-3 shrink-0">
+        <button type="button" id="btn-login" class="inline-flex items-center justify-center border border-primary/60 text-primary px-4 sm:px-6 py-2 rounded-md text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-primary/10 transition-colors">
+          Login
+        </button>
+        <a href="create-company.html" class="inline-flex items-center justify-center bg-primary text-[#0d160a] px-4 sm:px-6 py-2 rounded-md text-xs sm:text-sm font-medium tracking-wide uppercase hover:opacity-90 transition-opacity">
+          Sign Up
+        </a>
+      </nav>
+    </div>
   </header>
 
   <main class="flex-1 flex flex-col justify-center px-6 sm:px-10 lg:px-12 w-full max-w-5xl mx-auto pb-16">
@@ -71,5 +75,25 @@
       <div class="w-6 h-6 sm:w-8 sm:h-8 border border-primary"></div>
     </div>
   </div>
+  <script src="js/role.js"></script>
+  <script>
+    (function () {
+      var input = document.getElementById("login-email");
+      var btn = document.getElementById("btn-login");
+      try {
+        var saved = sessionStorage.getItem("kgapp_user_email");
+        if (saved) input.value = saved;
+      } catch (e) {}
+      btn.addEventListener("click", function () {
+        var email = input.value.trim();
+        if (!email) {
+          input.focus();
+          return;
+        }
+        if (window.KGAPP) window.KGAPP.applyRoleFromEmail(email);
+        window.location.href = "company-dashboard.html";
+      });
+    })();
+  </script>
 </body>
 </html>

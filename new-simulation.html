@@ -91,16 +91,16 @@
 <header class="bg-surface border-b border-outline/30 flex justify-between items-center w-full px-container-padding py-4 sticky top-0 z-50">
 <div class="flex items-center gap-8">
 <div class="flex items-center gap-3">
-<img alt="KG PRO Logo" class="h-8 w-auto" src="https://lh3.googleusercontent.com/aida/ADBb0ugwIf8ENye8WUJNVJIILTXR1_Qr9ZhJBn1-BQc0z19ch7OhB5SVz1Vmf5tZGih0OZdDH-eaar_eeC7oJ9rGAipwO1bR0Bo-PrQtTOXPMOfY5skVvDnZRXTkU_-BDdxbxxC3E1D5xPXvZLlzfDEihKbh1pUDaHB4SiY4YFJ6Sp1B9tLVhQBPdYaXliAObWKpwwAGx_MaSuLhpknM1GVi0p0KXEIJNVrCdAMbOtuYK6f7jiMsxP-d7dpR61nFtn54vlfC9vmhbapbTQ"/>
+<a href="landing.html" class="block" aria-label="KGAPP home"><img alt="KGAPP lite" class="h-8 w-auto" src="https://lh3.googleusercontent.com/aida/ADBb0ugwIf8ENye8WUJNVJIILTXR1_Qr9ZhJBn1-BQc0z19ch7OhB5SVz1Vmf5tZGih0OZdDH-eaar_eeC7oJ9rGAipwO1bR0Bo-PrQtTOXPMOfY5skVvDnZRXTkU_-BDdxbxxC3E1D5xPXvZLlzfDEihKbh1pUDaHB4SiY4YFJ6Sp1B9tLVhQBPdYaXliAObWKpwwAGx_MaSuLhpknM1GVi0p0KXEIJNVrCdAMbOtuYK6f7jiMsxP-d7dpR61nFtn54vlfC9vmhbapbTQ"/></a>
 </div>
 <nav class="hidden lg:flex items-center gap-6">
-<a class="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors" href="#">KG BOXES</a>
-<a class="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors" href="#">MY VEHICLES</a>
+<a class="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors" href="landing.html">Home</a>
+<a class="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors" href="company-dashboard.html">Company dashboard</a>
 </nav>
 </div>
 <div class="flex items-center gap-3">
 <a href="create-company.html" class="text-xs font-bold uppercase tracking-widest border border-primary text-primary px-5 py-2 rounded hover:bg-primary/10 transition-colors whitespace-nowrap">Sign up</a>
-<button type="button" class="text-xs font-bold uppercase tracking-widest border border-primary text-primary px-6 py-2 rounded hover:bg-primary/10 transition-colors">Login</button>
+<a href="company-dashboard.html" class="text-xs font-bold uppercase tracking-widest border border-primary text-primary px-6 py-2 rounded hover:bg-primary/10 transition-colors whitespace-nowrap">Dashboard</a>
 </div>
 </header>
 <main class="flex-1 max-w-[1440px] w-full mx-auto p-container-padding">
@@ -110,6 +110,12 @@
 <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
                 Configure fault injection parameters and signal continuity for the selected KG node.
             </p>
+<div id="sim-flow-nav" class="hidden mt-4">
+<a id="sim-back-vehicle" href="#" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary hover:underline">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+                Back to vehicle
+            </a>
+</div>
 </div>
 <!-- Vehicle + KG Box (replaces warning banner slot) -->
 <div class="mb-stack-md bg-surface-container border border-outline/30 rounded p-6">
@@ -388,8 +394,16 @@
 
   var params = new URLSearchParams(window.location.search);
   var vehicleId = params.get("vehicle") || "1";
+  var fromVehicle = params.get("vehicle");
   var csvText = VEHICLE_CSV[vehicleId] || VEHICLE_CSV.default;
   var meta = VEHICLE_META[vehicleId] || VEHICLE_META["1"];
+
+  if (fromVehicle) {
+    var navEl = document.getElementById("sim-flow-nav");
+    var backEl = document.getElementById("sim-back-vehicle");
+    navEl.classList.remove("hidden");
+    backEl.href = "vehicle-detail.html?id=" + encodeURIComponent(fromVehicle);
+  }
 
   document.getElementById("car-brand").textContent = meta.brand;
   document.getElementById("car-model").textContent = meta.model;

@@ -32,25 +32,21 @@
 <body class="bg-[#0d160a] min-h-screen flex flex-col">
   <header class="flex justify-between items-center w-full px-6 md:px-8 py-6 bg-[#0d160a] border-b border-[#2e372a] sticky top-0 z-50">
     <div class="flex items-center gap-8 md:gap-12 min-w-0">
-      <a href="admin-dashboard.html" class="flex items-center gap-2 shrink-0">
+      <a href="landing.html" class="flex items-center gap-2 shrink-0">
         <div class="w-8 h-8 bg-[#00c600] flex items-center justify-center rounded-[6px]">
           <span class="material-symbols-outlined text-black font-bold text-xl">terminal</span>
         </div>
         <span class="text-lg md:text-xl font-medium text-[#00c600] tracking-tighter uppercase truncate">KGAPP <span class="font-light opacity-60 lowercase">lite</span></span>
       </a>
       <nav class="hidden sm:flex items-center gap-4 md:gap-8 text-[10px] md:text-[11px] font-medium uppercase tracking-[0.15em] md:tracking-[0.2em]">
-        <a class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="admin-dashboard.html">Dashboard</a>
+        <a class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="landing.html">Home</a>
         <a class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="company-dashboard.html">Company dashboard</a>
-        <a class="text-on-surface-variant/70 hover:text-[#00c600] transition-colors" href="my-vehicles.html">Vehicles</a>
       </nav>
     </div>
     <div class="flex items-center gap-2 md:gap-4 shrink-0">
-      <a href="create-company.html" class="px-3 md:px-5 py-2 border border-[#00c600] text-[#00c600] text-[10px] md:text-[11px] font-medium uppercase tracking-[0.15em] md:tracking-[0.2em] rounded-[6px] bg-[#00c600]/10 hover:bg-[#00c600]/20 transition-colors whitespace-nowrap">
-        Sign up
-      </a>
-      <button type="button" class="px-3 md:px-6 py-2 border border-[#00c600]/40 text-[#00c600] text-[10px] md:text-[11px] font-medium uppercase tracking-[0.15em] md:tracking-[0.2em] rounded-[6px] hover:bg-[#00c600] hover:text-black transition-all active-state-black whitespace-nowrap">
+      <a href="company-dashboard.html" class="px-3 md:px-6 py-2 border border-[#00c600]/40 text-[#00c600] text-[10px] md:text-[11px] font-medium uppercase tracking-[0.15em] md:tracking-[0.2em] rounded-[6px] hover:bg-[#00c600] hover:text-black transition-all whitespace-nowrap">
         Login
-      </button>
+      </a>
     </div>
   </header>
 
@@ -58,7 +54,9 @@
     <div class="p-6 md:p-10 lg:p-12 flex flex-col gap-8 max-w-3xl mx-auto w-full">
       <section class="flex flex-col gap-3">
         <div class="flex flex-wrap items-center gap-2 text-[10px] font-medium tracking-[0.25em] uppercase text-on-surface-variant/60">
-          <span class="text-on-surface-variant/50">Onboarding</span>
+          <a class="text-on-surface-variant/50 hover:text-[#00c600] transition-colors" href="landing.html">Home</a>
+          <span class="text-on-surface-variant/30">/</span>
+          <span class="text-on-surface-variant/50">Sign up</span>
           <span class="text-on-surface-variant/30">/</span>
           <span class="text-[#00c600]">Create Company</span>
         </div>
@@ -77,6 +75,13 @@
       <form id="create-company-form" class="flex flex-col gap-10" novalidate>
         <div class="bg-[#151e12] border border-[#2e372a] rounded-[6px] p-6 md:p-8 flex flex-col gap-6">
           <h2 class="text-lg text-[#00c600] font-normal tracking-tight">Company details</h2>
+          <div class="flex flex-col gap-2">
+            <label for="admin-email" class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Your work email</label>
+            <input id="admin-email" name="adminEmail" type="email" required autocomplete="email"
+              class="bg-[#0d160a] border border-[#2e372a] focus:border-[#00c600] focus:ring-0 text-on-surface p-4 rounded-[6px] placeholder:text-on-surface-variant/25"
+              placeholder="you@company.com"/>
+            <p class="text-xs text-on-surface-variant/70 font-light">Addresses ending in <span id="domain-hint" class="font-mono text-on-surface-variant"></span> get Super Admin access (prototype: stored in this browser only).</p>
+          </div>
           <div class="flex flex-col gap-2">
             <label for="company-name" class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60">Company name</label>
             <input id="company-name" name="companyName" type="text" required autocomplete="organization"
@@ -113,6 +118,15 @@
 
         <div id="form-status" class="hidden text-sm font-medium rounded-[6px] px-4 py-3 border" role="status"></div>
 
+        <div id="post-save-next" class="hidden flex flex-col sm:flex-row sm:items-center gap-4 p-5 rounded-[6px] border border-[#00c600]/40 bg-[#00c600]/10">
+          <p class="text-sm text-on-surface font-light flex-1">
+            Company saved. Continue to the shared dashboard to see your fleet and open a vehicle.
+          </p>
+          <a href="company-dashboard.html" class="inline-flex items-center justify-center shrink-0 px-8 py-3 bg-[#00c600] text-black font-medium text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:bg-[#77ff61] transition-colors whitespace-nowrap">
+            Go to company dashboard
+          </a>
+        </div>
+
         <div class="flex flex-col sm:flex-row flex-wrap gap-4 pt-2">
           <button type="button" id="btn-save-continue"
             class="px-10 py-4 bg-[#00c600] text-black font-medium text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:bg-[#77ff61] transition-all active:scale-[0.98] active-state-black sm:min-w-[220px]">
@@ -148,9 +162,14 @@
     </div>
   </template>
 
+  <script src="js/role.js"></script>
   <script>
     (function () {
+      if (window.KGAPP && document.getElementById("domain-hint")) {
+        document.getElementById("domain-hint").textContent = window.KGAPP.superAdminDomain;
+      }
       var STORAGE_KEY = "kgapp_company_draft_v1";
+      var adminEmailEl = document.getElementById("admin-email");
       var rowsContainer = document.getElementById("instructor-rows");
       var template = document.getElementById("instructor-row-template");
       var addBtn = document.getElementById("add-instructor");
@@ -227,11 +246,20 @@
       }
 
       function persistDraft() {
+        var prevInvites = false;
+        try {
+          var prevRaw = sessionStorage.getItem(STORAGE_KEY);
+          if (prevRaw) {
+            var prev = JSON.parse(prevRaw);
+            prevInvites = !!prev.invitesSent;
+          }
+        } catch (e2) {}
         var payload = {
+          adminEmail: adminEmailEl.value.trim(),
           company: gatherCompany(),
           instructors: gatherInstructors(),
           savedAt: new Date().toISOString(),
-          invitesSent: false,
+          invitesSent: prevInvites,
         };
         try {
           sessionStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
@@ -254,12 +282,19 @@
       });
 
       document.getElementById("btn-save-continue").addEventListener("click", function () {
+        var adminE = adminEmailEl.value.trim();
+        if (!adminE) {
+          showStatus(false, "Please enter your work email.");
+          adminEmailEl.focus();
+          return;
+        }
         var c = gatherCompany();
         if (!c.companyName) {
           showStatus(false, "Please enter a company name.");
           companyName.focus();
           return;
         }
+        if (window.KGAPP) window.KGAPP.applyRoleFromEmail(adminE);
         var payload = persistDraft();
         var n = payload.instructors.length;
         showStatus(
@@ -270,9 +305,19 @@
             n +
             " instructor row(s) stored. No invitation emails have been sent. Continue setup (vehicles, faults), then use Send Email Invites when ready. (Prototype: data kept in this browser session only.)"
         );
+        var next = document.getElementById("post-save-next");
+        next.classList.remove("hidden");
+        next.scrollIntoView({ behavior: "smooth", block: "nearest" });
       });
 
       document.getElementById("btn-send-invites").addEventListener("click", function () {
+        var adminE = adminEmailEl.value.trim();
+        if (!adminE) {
+          showStatus(false, "Please enter your work email.");
+          adminEmailEl.focus();
+          return;
+        }
+        if (window.KGAPP) window.KGAPP.applyRoleFromEmail(adminE);
         var c = gatherCompany();
         if (!c.companyName) {
           showStatus(false, "Enter a company name before sending invites.");
@@ -318,10 +363,17 @@
             sessionStorage.setItem(STORAGE_KEY, JSON.stringify(p));
           }
         } catch (e) {}
+        var nextInv = document.getElementById("post-save-next");
+        nextInv.classList.remove("hidden");
+        nextInv.scrollIntoView({ behavior: "smooth", block: "nearest" });
       });
 
       var draft = loadDraft();
       if (draft && draft.company && draft.company.companyName) {
+        if (draft.adminEmail) {
+          adminEmailEl.value = draft.adminEmail;
+          if (window.KGAPP) window.KGAPP.applyRoleFromEmail(draft.adminEmail);
+        }
         companyName.value = draft.company.companyName || "";
         regionCountry.value = draft.company.regionCountry || "";
         address.value = draft.company.address || "";
@@ -337,6 +389,7 @@
           addInstructorRow();
         }
         updateRowLabels();
+        document.getElementById("post-save-next").classList.remove("hidden");
       } else {
         addInstructorRow();
       }

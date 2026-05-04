@@ -38,6 +38,14 @@
   </style>
 </head>
 <body class="bg-[#0d160a] min-h-screen flex flex-col">
+<script src="js/role.js"></script>
+<script>
+(function () {
+  if (!window.KGAPP || !window.KGAPP.readIsSuperAdmin()) {
+    window.location.replace("company-dashboard.html");
+  }
+})();
+</script>
   <header class="flex justify-between items-center w-full px-8 py-6 bg-[#0d160a] border-b border-[#2e372a] sticky top-0 z-50">
     <div class="flex items-center gap-12">
       <a href="admin-dashboard.html" class="flex items-center gap-2 group">
