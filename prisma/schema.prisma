@@ -1,0 +1,91 @@
+// SQLite — local prototype. Generate: npx prisma generate && npx prisma db push
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Organization {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+
+  users User[]
+  cars  Car[]
+
+  @@map("organizations")
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  organizationId Int?     @map("organization_id")
+  name           String?
+  email          String   @unique
+  passwordHash   String?  @map("password_hash")
+  role           String   @default("technician")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  organization Organization? @relation(fields: [organizationId], references: [id])
+  userHardware UserHardware[]
+
+  @@map("users")
+}
+
+model HardwareBox {
+  id        Int      @id @default(autoincrement())
+  boxName   String   @unique @map("box_name")
+  token     String
+  secret    String
+  status    String   @default("active")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  userHardware UserHardware[]
+  simulations  Simulation[]
+
+  @@map("hardware_boxes")
+}
+
+model Car {
+  id             Int      @id @default(autoincrement())
+  organizationId Int?     @map("organization_id")
+  brand          String?
+  model          String?
+  year           Int?
+  vin            String?
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  organization Organization? @relation(fields: [organizationId], references: [id])
+  simulations  Simulation[]
+
+  @@map("cars")
+}
+
+model UserHardware {
+  id            Int      @id @default(autoincrement())
+  userId        Int?     @map("user_id")
+  hardwareBoxId Int?     @map("hardware_box_id")
+  assignedAt    DateTime @default(now()) @map("assigned_at")
+
+  user        User?        @relation(fields: [userId], references: [id])
+  hardwareBox HardwareBox? @relation(fields: [hardwareBoxId], references: [id])
+
+  @@unique([userId, hardwareBoxId])
+  @@map("user_hardware")
+}
+
+model Simulation {
+  id            Int      @id @default(autoincrement())
+  carId         Int?     @map("car_id")
+  hardwareBoxId Int?     @map("hardware_box_id")
+  csvData       String?  @map("csv_data")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  car         Car?          @relation(fields: [carId], references: [id])
+  hardwareBox HardwareBox? @relation(fields: [hardwareBoxId], references: [id])
+
+  @@map("simulations")
+}
