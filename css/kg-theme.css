@@ -1,5 +1,5 @@
 /**
- * KG App Lite — global design tokens (Akurat, palette, typography).
+ * KG App Lite — global design tokens (Akkurat / LL Akkurat, palette, typography).
  * Load after Tailwind so these defaults apply where utilities omit weight/color.
  */
 
@@ -16,8 +16,8 @@ html {
 }
 
 body {
-  font-family: "Akurat", "LL Akkurat", "Akkurat", ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, sans-serif;
+  font-family: "LL Akkurat", "Akkurat", "Akkurat Std", "Linotype Akkurat", ui-sans-serif, system-ui,
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   font-weight: 200;
   color: var(--kg-text);
   background-color: var(--kg-bg);
@@ -31,6 +31,19 @@ h4,
 h5,
 h6 {
   font-weight: 400;
+}
+
+/**
+ * Tailwind CDN may emit .font-h1 / .font-h2 with only a single face — no fallback, so browsers
+ * can pick a serif default. Force the Akkurat stack (must win over Tailwind utilities).
+ */
+.font-h1,
+.font-h2,
+.font-caption,
+.font-body-md,
+.font-body-lg {
+  font-family: "LL Akkurat", "Akkurat", "Akkurat Std", "Linotype Akkurat", ui-sans-serif, system-ui,
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
 }
 
 .material-symbols-outlined {

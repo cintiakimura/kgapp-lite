@@ -76,11 +76,12 @@
                     "stack-lg": "48px"
             },
             "fontFamily": {
-                    "h1": ["Akurat"],
-                    "h2": ["Akurat"],
-                    "caption": ["Akurat"],
-                    "body-md": ["Akurat"],
-                    "body-lg": ["Akurat"]
+                    "sans": ["LL Akkurat", "Akkurat", "Akkurat Std", "Linotype Akkurat", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Helvetica Neue", "Arial", "sans-serif"],
+                    "h1": ["LL Akkurat", "Akkurat", "Akkurat Std", "Linotype Akkurat", "ui-sans-serif", "system-ui", "sans-serif"],
+                    "h2": ["LL Akkurat", "Akkurat", "Akkurat Std", "Linotype Akkurat", "ui-sans-serif", "system-ui", "sans-serif"],
+                    "caption": ["LL Akkurat", "Akkurat", "Akkurat Std", "Linotype Akkurat", "ui-sans-serif", "system-ui", "sans-serif"],
+                    "body-md": ["LL Akkurat", "Akkurat", "Akkurat Std", "Linotype Akkurat", "ui-sans-serif", "system-ui", "sans-serif"],
+                    "body-lg": ["LL Akkurat", "Akkurat", "Akkurat Std", "Linotype Akkurat", "ui-sans-serif", "system-ui", "sans-serif"]
             },
             "fontSize": {
                     "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400"}],
@@ -97,7 +98,7 @@
         body {
             background-color: #0A0F0A;
             color: #FFFFFF;
-            font-family: 'Akurat', sans-serif;
+            font-family: "LL Akkurat", "Akkurat", "Akkurat Std", "Linotype Akkurat", ui-sans-serif, system-ui, sans-serif;
             font-weight: 200;
         }
         .material-symbols-outlined {
@@ -122,7 +123,7 @@
         }
     </style>
 </head>
-<body class="bg-[#0A0F0A] min-h-screen flex flex-col">
+<body class="bg-[#0A0F0A] min-h-screen flex flex-col font-sans antialiased">
 <script src="js/role.js"></script>
 <script>
 (function () {
@@ -139,13 +140,13 @@
 <span class="text-xl font-normal text-white tracking-tighter uppercase">KGAPP <span class="font-thin lowercase opacity-70">lite</span></span>
 </a>
 <nav class="hidden md:flex items-center gap-8">
-<a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] transition-colors" href="company-dashboard.html">COMPANY</a>
-<a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] transition-colors" href="#">DASHBOARD</a>
-<a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] transition-colors" href="#">SIMULATIONS</a>
-<a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] transition-colors" href="#">VEHICLES</a>
-<a class="text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] border-b border-[#00c600]" href="#">ADMIN</a>
-<a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] transition-colors" href="manage-brand-logic.html">BRAND LOGIC</a>
-<a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-medium uppercase tracking-[0.2em] transition-colors" href="manage-platform-logic.html">PLATFORM LOGIC</a>
+<a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-thin uppercase tracking-[0.2em] transition-colors" href="company-dashboard.html">COMPANY</a>
+<a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-thin uppercase tracking-[0.2em] transition-colors" href="#">DASHBOARD</a>
+<a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-thin uppercase tracking-[0.2em] transition-colors" href="#">SIMULATIONS</a>
+<a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-thin uppercase tracking-[0.2em] transition-colors" href="#">VEHICLES</a>
+<a class="text-[#00c600] text-[11px] font-normal uppercase tracking-[0.2em] border-b border-[#00c600]" href="#">ADMIN</a>
+<a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-thin uppercase tracking-[0.2em] transition-colors" href="manage-brand-logic.html">BRAND LOGIC</a>
+<a class="text-on-surface-variant/70 hover:text-[#00c600] text-[11px] font-thin uppercase tracking-[0.2em] transition-colors" href="manage-platform-logic.html">PLATFORM LOGIC</a>
 </nav>
 </div>
 <div class="flex items-center gap-3 sm:gap-6">
@@ -164,11 +165,11 @@
 <!-- Page Header -->
 <section class="flex flex-col gap-2">
 <div class="flex items-center gap-2 text-[#00c600] mb-2">
-<span class="text-[10px] font-medium tracking-[0.3em] uppercase">System Core</span>
+<span class="text-[10px] font-thin tracking-[0.3em] uppercase">System Core</span>
 <div class="h-[1px] w-12 bg-[#00c600]/30"></div>
 </div>
-<h2 class="font-h1 text-h1 text-on-surface">Admin Management <span class="text-on-surface-variant/30 font-light">v1.3</span></h2>
-<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl font-light">High-level orchestration of hardware nodes, encrypted client partitioning, and global system aesthetics.</p>
+<h2 class="font-h1 text-h1 text-on-surface font-normal">Admin Management <span class="text-on-surface-variant/30 font-thin">v1.3</span></h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl font-thin">High-level orchestration of hardware nodes, encrypted client partitioning, and global system aesthetics.</p>
 </section>
 <!-- Grid Layout -->
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -176,24 +177,24 @@
 <section class="lg:col-span-7 flex flex-col gap-8">
 <div class="bg-[#1A2A1A] p-8 border border-[rgba(0,198,0,0.28)] rounded-[6px]">
 <div class="flex items-center justify-between mb-8">
-<h3 class="font-h2 text-h2 text-[#00c600]">Register KG Box</h3>
+<h3 class="font-h2 text-h2 text-white font-normal">Register KG Box</h3>
 <span class="material-symbols-outlined text-on-surface-variant/40" data-icon="memory">memory</span>
 </div>
 <form class="flex flex-col gap-6">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div class="flex flex-col gap-2">
 <label class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">Box Identifier</label>
-<input class="bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface font-light p-4 rounded-[6px] transition-colors placeholder:text-on-surface-variant/20" placeholder="KG-BX-XXXX" type="text"/>
+<input class="bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface font-thin p-4 rounded-[6px] transition-colors placeholder:text-on-surface-variant/20" placeholder="KG-BX-XXXX" type="text"/>
 </div>
 <div class="flex flex-col gap-2">
 <label class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">Hardware Version</label>
-<input class="bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface font-light p-4 rounded-[6px] transition-colors placeholder:text-on-surface-variant/20" placeholder="v4.2-LITE" type="text"/>
+<input class="bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface font-thin p-4 rounded-[6px] transition-colors placeholder:text-on-surface-variant/20" placeholder="v4.2-LITE" type="text"/>
 </div>
 </div>
 <div class="flex flex-col gap-2">
 <label class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">System API Token</label>
 <div class="relative">
-<input class="w-full bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface font-light p-4 rounded-[6px] transition-colors" type="password" value="••••••••••••••••"/>
+<input class="w-full bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface font-thin p-4 rounded-[6px] transition-colors" type="password" value="••••••••••••••••"/>
 <button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant/40 hover:text-[#00c600]" type="button">
 <span class="material-symbols-outlined text-sm" data-icon="key">key</span>
 </button>
@@ -201,7 +202,7 @@
 </div>
 <div class="flex flex-col gap-2">
 <label class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">RSA Box Secret Key</label>
-<textarea class="bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface font-light p-4 rounded-[6px] transition-colors placeholder:text-on-surface-variant/20 font-mono text-[11px]" placeholder="Paste PEM format secret here..." rows="3"></textarea>
+<textarea class="bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface font-thin p-4 rounded-[6px] transition-colors placeholder:text-on-surface-variant/20 font-mono text-[11px]" placeholder="Paste PEM format secret here..." rows="3"></textarea>
 </div>
 <button class="self-start px-10 py-4 bg-transparent border border-[#00C600] text-white font-thin text-[11px] uppercase tracking-[0.2em] rounded-[6px] hover:bg-[rgba(0,198,0,0.15)] transition-all active:scale-95 active-state-black" type="submit">
                                 Initialize Hardware
@@ -213,7 +214,7 @@
 <div class="p-6 border-b border-[rgba(0,198,0,0.28)] flex justify-between items-center">
 <h3 class="font-h2 text-lg text-on-surface">Active Inventory</h3>
 <div class="flex gap-2">
-<div class="px-3 py-1 bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] rounded-[6px] flex items-center gap-2 text-[10px] font-medium text-on-surface-variant uppercase tracking-[0.1em]">
+<div class="px-3 py-1 bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] rounded-[6px] flex items-center gap-2 text-[10px] font-thin text-on-surface-variant uppercase tracking-[0.1em]">
 <span class="w-1.5 h-1.5 bg-[#00c600] rounded-full animate-pulse"></span>
                                     12 Linked
                                 </div>
@@ -223,17 +224,17 @@
 <table class="w-full text-left border-collapse">
 <thead>
 <tr class="text-[10px] uppercase text-on-surface-variant/40 tracking-[0.2em] border-b border-[rgba(0,198,0,0.28)]">
-<th class="p-6 font-medium">Node ID</th>
-<th class="p-6 font-medium">State</th>
-<th class="p-6 font-medium">Token Hash</th>
-<th class="p-6 font-medium text-right">Actions</th>
+<th class="p-6 font-normal">Node ID</th>
+<th class="p-6 font-normal">State</th>
+<th class="p-6 font-normal">Token Hash</th>
+<th class="p-6 font-normal text-right">Actions</th>
 </tr>
 </thead>
 <tbody class="font-body-md text-on-surface divide-y divide-[rgba(0,198,0,0.18)]/50">
 <tr class="hover:bg-[rgba(0,198,0,0.22)]/20 transition-colors">
-<td class="p-6 text-sm font-light">KG-BX-9920</td>
+<td class="p-6 text-sm font-thin">KG-BX-9920</td>
 <td class="p-6">
-<span class="text-[#00c600] text-[9px] font-medium uppercase tracking-[0.1em] border border-[#00c600]/30 px-2 py-0.5 rounded-[4px]">Stable</span>
+<span class="text-[#00c600] text-[9px] font-thin uppercase tracking-[0.1em] border border-[#00c600]/30 px-2 py-0.5 rounded-[4px]">Stable</span>
 </td>
 <td class="p-6 font-mono text-[10px] text-on-surface-variant/50">...4eA9_PRO</td>
 <td class="p-6 text-right">
@@ -243,9 +244,9 @@
 </td>
 </tr>
 <tr class="hover:bg-[rgba(0,198,0,0.22)]/20 transition-colors">
-<td class="p-6 text-sm font-light">KG-BX-8812</td>
+<td class="p-6 text-sm font-thin">KG-BX-8812</td>
 <td class="p-6">
-<span class="text-[#00c600] text-[9px] font-medium uppercase tracking-[0.1em] border border-[#00c600]/30 px-2 py-0.5 rounded-[4px]">Stable</span>
+<span class="text-[#00c600] text-[9px] font-thin uppercase tracking-[0.1em] border border-[#00c600]/30 px-2 py-0.5 rounded-[4px]">Stable</span>
 </td>
 <td class="p-6 font-mono text-[10px] text-on-surface-variant/50">...1mX2_PRO</td>
 <td class="p-6 text-right">
@@ -255,9 +256,9 @@
 </td>
 </tr>
 <tr class="hover:bg-[rgba(0,198,0,0.22)]/20 transition-colors">
-<td class="p-6 text-sm font-light">KG-BX-1104</td>
+<td class="p-6 text-sm font-thin">KG-BX-1104</td>
 <td class="p-6">
-<span class="text-on-surface-variant/40 text-[9px] font-medium uppercase tracking-[0.1em] border border-[rgba(0,198,0,0.28)] px-2 py-0.5 rounded-[4px]">Offline</span>
+<span class="text-on-surface-variant/40 text-[9px] font-thin uppercase tracking-[0.1em] border border-[rgba(0,198,0,0.28)] px-2 py-0.5 rounded-[4px]">Offline</span>
 </td>
 <td class="p-6 font-mono text-[10px] text-on-surface-variant/50">...0vQ7_PRO</td>
 <td class="p-6 text-right">
@@ -279,7 +280,7 @@
 <div class="flex flex-col gap-6">
 <div class="flex flex-col gap-2">
 <label class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">Select Hardware Node</label>
-<select class="bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface font-light p-4 rounded-[6px] appearance-none">
+<select class="bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface font-thin p-4 rounded-[6px] appearance-none">
 <option class="bg-[#1A2A1A]">KG-BX-9920 (Production)</option>
 <option class="bg-[#1A2A1A]">KG-BX-8812 (Testing)</option>
 <option class="bg-[#1A2A1A]">KG-BX-1104 (Maintenance)</option>
@@ -287,7 +288,7 @@
 </div>
 <div class="flex flex-col gap-2">
 <label class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">Select Client Entity</label>
-<select class="bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface font-light p-4 rounded-[6px] appearance-none">
+<select class="bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] focus:border-[#00c600] focus:ring-0 text-on-surface font-thin p-4 rounded-[6px] appearance-none">
 <option class="bg-[#1A2A1A]">Global Logistics Corp</option>
 <option class="bg-[#1A2A1A]">Aero Dynamics Ltd</option>
 <option class="bg-[#1A2A1A]">Stark Industrial</option>
@@ -308,14 +309,14 @@
 <div class="w-6 h-6 rounded-[2px] bg-[#00c600]"></div>
 <span class="font-mono text-[10px] text-on-surface">#00C600</span>
 <div class="flex-1 text-right">
-<button class="text-[10px] uppercase font-medium text-[#00c600] hover:underline">Modify</button>
+<button class="text-[10px] uppercase font-thin text-[#00c600] hover:underline">Modify</button>
 </div>
 </div>
 </div>
 <div class="flex flex-col gap-2">
 <label class="font-caption text-[10px] uppercase text-on-surface-variant/60 tracking-[0.2em]">Primary Typography</label>
 <div class="p-4 bg-[#0A0F0A] border border-[rgba(0,198,0,0.28)] rounded-[6px]">
-<p class="font-body-md text-on-surface font-thin">Akurat (titles 400, body 200)</p>
+<p class="font-body-md text-on-surface font-thin">Akkurat (titles 400, body 200)</p>
 </div>
 </div>
 <div class="flex flex-col gap-2">
@@ -353,9 +354,9 @@
 <div class="absolute inset-0 p-8 flex flex-col justify-end">
 <div class="flex items-center gap-2 mb-1">
 <div class="w-1.5 h-1.5 rounded-full bg-[#00c600]"></div>
-<p class="text-[9px] uppercase tracking-[0.3em] text-[#00c600] font-medium">Synchronized</p>
+<p class="text-[9px] uppercase tracking-[0.3em] text-[#00c600] font-thin">Synchronized</p>
 </div>
-<h4 class="text-lg text-white font-medium">Core Nodes Active</h4>
+<h4 class="text-lg text-white font-normal">Core Nodes Active</h4>
 </div>
 </div>
 </section>
